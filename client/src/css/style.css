@@ -1,0 +1,418 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(15, 15, 15);
+  color: rgb(221, 221, 221);
+}
+
+a {
+  text-decoration: none;
+}
+
+div#wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  perspective: 7px;
+}
+
+header {
+  background: linear-gradient(0.25turn, rgb(15, 15, 15), rgb(67, 67, 67));
+  display: flex;
+  justify-content: start;
+  position: relative;
+  padding-top: 9px;
+}
+
+div#logoContainer {
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+}
+
+img#ratmodHeadImage {
+  width: 66.6px;
+  height: 66.6px;
+}
+
+div#textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+div#serverIpText {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+
+div#serverNameText {
+  display: flex;
+  justify-content: center;
+  font-size: 23px;
+}
+
+div#someText {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  padding-top: 10px;
+}
+
+section {
+  padding-top: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  z-index: -1;
+}
+
+img#bgImage {
+  position: absolute;
+  height: 100%;
+  transform: translateZ(-6px) scale(1.06);
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.666;
+  filter: grayscale(0.666);
+}
+
+div#contentContainer {
+  overflow-x: auto;
+}
+
+div#contentContainer a {
+  color: rgb(182, 182, 182);
+}
+
+div#contentContainer a div {
+  text-align: center;
+}
+
+div#contentContainer a:hover {
+  color: rgb(236, 236, 236);
+}
+
+button#sortButton {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-size: 21px;
+  color: rgb(104, 127, 148);
+}
+
+table {
+  width: 100%;
+  border-radius: 5px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+td {
+  padding: 5px 10px;
+  color: rgb(221, 221, 221);
+  background-color: rgba(166, 166, 166, 0.27);
+}
+
+thead th {
+  padding: 5px 10px;
+  color: rgb(221, 221, 221);
+  background-color: rgb(34, 37, 51);
+  text-align: center;
+  white-space: nowrap;
+}
+
+thead th:first-child {
+  padding-top: 10px;
+}
+
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+tbody td {
+  position: relative;
+}
+
+tbody td:hover {
+  color: rgb(34, 37, 51);
+}
+
+tbody td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+table#profileTotal,
+table#profileWeapons {
+  text-align: center;
+}
+
+table#profileTotal th:first-child,
+table#profileWeapons th:first-child {
+  padding-bottom: 10px;
+}
+
+div#profilePlayerName {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 20px 30px 20px;
+  font-size: 22px;
+}
+
+div#profilePlayerName div#profilePlayerNameWrapper {
+  position: relative;
+  background-color: rgba(108, 108, 108, 0.27);
+  padding: 13px 13px 11px 13px;
+  border-radius: 5px;
+}
+
+div#profilePlayerName div#profilePlayerNameWrapper::before,
+div#profilePlayerName div#profilePlayerNameWrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+}
+
+div#profilePlayerName div#profilePlayerNameWrapper::before {
+  left: -20px;
+  border-color: transparent rgba(108, 108, 108, 0.27) transparent transparent;
+}
+
+div#profilePlayerName div#profilePlayerNameWrapper::after {
+  right: -20px;
+  border-color: transparent transparent transparent rgba(108, 108, 108, 0.27);
+}
+
+div#profileWeaponsHeader {
+  text-align: center;
+  padding: 30px 20px 20px 20px;
+  font-size: 16px;
+}
+
+div#profileMedalsHeader {
+  text-align: center;
+  padding: 30px 20px 6.66px 20px;
+  font-size: 16px;
+}
+
+div#profileMedalsContainer {
+  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+div#profileMedalContainer {
+  flex-basis: 16.666%;
+  padding: 10px;
+  text-align: center;
+}
+
+img#profileMedalImage {
+  max-width: 66.6px;
+}
+
+div#profileMedalDataWrapper {
+  padding-top: 6.66px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 60px 10px 30px 10px;
+}
+
+.text-black {
+  color: rgb(0, 0, 0);
+  color-scheme: only light;
+}
+.text-red {
+  color: rgb(255, 20, 20);
+}
+.text-lime {
+  color: rgb(0, 255, 0);
+}
+.text-yellow {
+  color: rgb(255, 255, 0);
+}
+.text-blue {
+  color: rgb(22, 45, 255);
+}
+.text-cyan {
+  color: rgb(0, 255, 255);
+}
+.text-pink {
+  color: rgb(255, 36, 190);
+}
+.text-white {
+  color: rgb(255, 255, 255);
+}
+.text-orange {
+  color: rgb(255, 165, 0);
+}
+
+/* menu inspired by Kyle */
+/* MIT License
+Copyright (c) 2023 WebDevSimplified
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+
+:root {
+  --barWidth: 26px;
+  --barHeight: 4px;
+  --burgerGap: 4px;
+  --burgerHeight: calc(var(--barHeight) * 3 + var(--burgerGap) * 2);
+  --burgerForeground: rgb(34, 37, 51);
+  --burgerBackground: rgb(199, 199, 199);
+  --animationTiming: 200ms ease-in-out;
+  --xWidth: calc(var(--burgerHeight) * 1.41421356237);
+}
+
+label#burgerMenu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--burgerGap);
+  width: max-content;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 444px) {
+  label#burgerMenu {
+    right: 20px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  label#burgerMenu {
+    right: 10px;
+  }
+}
+
+label#burgerMenu:has(input:checked) {
+  --burgerForeground: rgb(199, 199, 199);
+  --burgerBackground: rgb(34, 37, 51);
+}
+
+label#burgerMenu:has(input:focus-visible)::before,
+label#burgerMenu:has(input:focus-visible)::after,
+label#burgerMenu input:focus-visible {
+  border: 1px solid var(--burgerBackground);
+  box-shadow: 0 0 0 1px var(--burgerForeground);
+}
+
+label#burgerMenu::before,
+label#burgerMenu::after,
+label#burgerMenu input {
+  content: "";
+  width: var(--barWidth);
+  height: var(--barHeight);
+  background-color: var(--burgerForeground);
+  border-radius: 100px;
+  transform-origin: left center;
+  transition:
+    opacity var(--animationTiming),
+    width var(--animationTiming),
+    rotate var(--animationTiming),
+    translate var(--animationTiming),
+    burgerBackground-color var(--animationTiming);
+}
+
+label#burgerMenu input {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  pointer-events: none;
+}
+
+label#burgerMenu:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--xWidth);
+  translate: 0 calc(var(--barHeight) / -2);
+}
+
+label#burgerMenu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--xWidth);
+  translate: 0 calc(var(--barHeight) / 2);
+}
+
+label#burgerMenu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+aside#sidebar {
+  transition: translate var(--animationTiming);
+  translate: 100%;
+  padding: 1rem 1.5rem;
+  padding-top: 21.333px;
+  border-bottom-left-radius: 5px;
+  background-color: rgb(15, 15, 15);
+  position: absolute;
+  right: 0;
+}
+
+aside#sidebar a {
+  color: var(--burgerBackground);
+}
+
+aside#sidebar a:hover {
+  color: rgb(255, 125, 235);
+}
+
+div#navItem {
+  padding: 10px;
+}
+
+label#burgerMenu:has(input:checked) + #sidebar {
+  translate: 0;
+}
+/* end of menu */

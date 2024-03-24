@@ -1,0 +1,20 @@
+{
+  "extends": ["airbnb-base", "prettier","plugin:node/recommended-module"],
+  "plugins": ["prettier"],
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "prettier/prettier": ["error"],
+    "no-console": 0,
+    "operator-linebreak": 0,
+    "import/extensions": ["error", { "js": "always", "css": "always" }],
+    "no-continue": 0,
+    "implicit-arrow-linebreak": 0,
+    "function-paren-newline": 0
+  }
+}
