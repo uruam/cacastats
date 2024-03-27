@@ -58,7 +58,7 @@ The server will be running locally on port 3000. Access the application by openi
 
 ## Code Style
 
-If you're planning to contribute, it's important to ensure code consistency and style adherence. The project utilizes ESLint and Prettier for code linting and formatting. While these tools are integrated into the build process for the client using webpack, the server code needs to be linted separately.
+The project utilizes ESLint and Prettier for code linting and formatting. While these tools are integrated into the build process for the client using webpack, the server code needs to be linted separately.
 
 Steps:
 
@@ -78,7 +78,9 @@ Resolve any reported issues based on ESLint's recommendations
 
 ## Credits
 
-Icons: [RatMod authors](https://ratmod.github.io).
+icons: [RatMod authors](https://ratmod.github.io)
+
+oaquery: [Rodent Control](https://github.com/rdntcntrl)
 
 ## License
 

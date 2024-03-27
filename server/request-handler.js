@@ -1,5 +1,6 @@
 import fs from "fs";
 import { URL } from "url";
+import { spawn } from "child_process";
 import currDir from "./utils.js";
 
 const dirname = currDir(import.meta.url);
@@ -21,6 +22,7 @@ const serveStaticFile = (parsedUrl, contentType, res) => {
   if (
     pathName === "/" ||
     pathName === "/profile" ||
+    pathName === "/online" ||
     pathName === "/links" ||
     pathName === "/info"
   ) {
@@ -88,6 +90,74 @@ const serveDataFile = (res, queryString) => {
   }
 };
 
+const serveOaquery = (res) => {
+  function parseOutputToJSON(output) {
+    const lines = output.trim().split("\n");
+    const serverInfo = {};
+    const players = [];
+
+    // Parse the first line to extract IP and server name
+    const [ipAndServerName] = lines.shift().split(" Players:");
+    const [ip, serverName] = ipAndServerName.split(" ");
+    serverInfo.ip = ip;
+    serverInfo.serverName = serverName.trim();
+
+    // Parse the rest of the lines
+    lines.forEach((line) => {
+      if (line.includes(":")) {
+        const [key, value] = line.split(":").map((str) => str.trim());
+        if (key === "Players") {
+          serverInfo.numberOfPlayers = value;
+        } else {
+          serverInfo[key.toLowerCase()] = value;
+        }
+      } else if (line.trim() !== "") {
+        // Extract player information
+        const match = line.trim().match(/^(\d+)\s+(\d+ms)\s+(.*)$/);
+        if (match) {
+          const [, playerScore, ping, playerName] = match;
+          const player = {
+            name: playerName,
+            ping,
+            score: playerScore,
+          };
+          players.push(player);
+        }
+      }
+    });
+
+    serverInfo.players = players;
+    return serverInfo;
+  }
+
+  const pythonProcess = spawn("python3", [
+    "./oaquery.py",
+    "96.126.107.177:27200",
+    "--empty",
+  ]);
+
+  let responseData = "";
+
+  pythonProcess.stdout.on("data", (data) => {
+    responseData += data.toString();
+  });
+
+  pythonProcess.stderr.on("data", (data) => {
+    console.error(`Error: ${data}`);
+  });
+
+  pythonProcess.on("close", (code) => {
+    if (code === 0 && responseData.trim() !== "") {
+      const serverInfo = parseOutputToJSON(responseData);
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(serverInfo));
+    } else {
+      res.writeHead(500, { "Content-Type": "text/plain" });
+      res.end("Error: Python script execution failed or produced no output.");
+    }
+  });
+};
+
 const handleRequest = (req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host}/`);
 
@@ -100,6 +170,9 @@ const handleRequest = (req, res) => {
       break;
     case "/profile-data":
       serveDataFile(res, queryString);
+      break;
+    case "/oaquery":
+      serveOaquery(res);
       break;
     default:
       serveStaticFile(parsedUrl, getContentType(pathName), res);

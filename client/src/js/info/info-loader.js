@@ -1,4 +1,4 @@
-const infoNews = () => {
+const infoLoader = () => {
   const someText = document.getElementById("someText");
   someText.innerText = "INFO";
 
@@ -6,4 +6,4 @@ const infoNews = () => {
   contentContainer.innerText = "...";
 };
 
-export default infoNews;
+export default infoLoader;

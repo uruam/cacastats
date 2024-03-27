@@ -2,6 +2,7 @@ import "../css/style.css";
 import ratmodHeadIcon from "../assets/ratmod-head-icon.svg";
 import loadBoard from "./board/board-loader.js";
 import loadProfile from "./profile/profile-loader.js";
+import loadOnline from "./online/online-loader.js";
 import loadLinks from "./links/links-loader.js";
 import loadInfo from "./info/info-loader.js";
 
@@ -21,6 +22,9 @@ const loadView = () => {
       break;
     case "/profile":
       loadProfile();
+      break;
+    case "/online":
+      loadOnline();
       break;
     case "/links":
       loadLinks();

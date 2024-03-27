@@ -103,6 +103,21 @@ div#contentContainer a:hover {
   color: rgb(236, 236, 236);
 }
 
+div#onlineContainer div {
+  text-align: center;
+}
+
+div#onlineContainer span#refresh {
+  font-size: 25px;
+  vertical-align: middle;
+  line-height: 2;
+}
+
+div#onlineContainer ul {
+  display: block;
+  list-style-type: none;
+}
+
 button#sortButton {
   background-color: transparent;
   background-repeat: no-repeat;
