@@ -31,7 +31,7 @@ const renderOnline = (data) => {
 
   gameTypeDiv.textContent = data.gametype.toUpperCase();
   mapDiv.textContent = data.map;
-  numberOfPlayersDiv.textContent = `${data.numberOfPlayers} players`;
+  numberOfPlayersDiv.textContent = data.numberOfPlayers;
 
   refreshSpan.textContent = "🔄";
   refreshLink.href = "/online";
