@@ -27,8 +27,8 @@ const parseOaqueryToJSON = (output) => {
   serverInfo.serverName = serverName.trim();
 
   // Parse the rest of the lines
-  lines.forEach((line) => {
-    if (line.includes(":")) {
+  lines.forEach((line, index) => {
+    if (line.includes(":") && index < 3) {
       const [key, value] = line.split(":").map((str) => str.trim());
       if (key === "Players") {
         serverInfo.numberOfPlayers = value;
