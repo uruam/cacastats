@@ -1,6 +1,6 @@
 # [caca.gg](https://caca.gg)
 
-Web-based application designed to provide a comprehensive scoreboard and player profiles with detailed statistics for a RatMod Clan Arena game server. It allows users to effortlessly access both the overall game statistics and individual player metrics from the last month, enhancing their gaming experience.
+Web-based application designed to provide a comprehensive scoreboard and player profiles with detailed statistics for a RatMod Clan Arena game server. It allows users to effortlessly access both the overall game statistics and individual player metrics from the last 30 days, enhancing their gaming experience.
 
 ## Requirement
 
