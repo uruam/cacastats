@@ -134,6 +134,7 @@ const serveOaquery = (res) => {
   const pythonProcess = spawn("python3", [
     "./oaquery.py",
     "96.126.107.177:27200",
+    "--empty",
     "--bots",
     "--sort",
   ]);
