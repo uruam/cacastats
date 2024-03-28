@@ -813,7 +813,8 @@ def pretty_print(serverinfos, show_empty=False, colors=False, bots=False, sort=F
             fields.append(''.rjust(just))
             fields.append("{:4}".format(p.score))
             fields.append("{:4}ms".format(p.ping))
-            fields.append(p.name.getstr(colors))
+            # fields.append(p.name.getstr(colors))
+            fields.append(p.name.gethtml())
             print(' '.join(fields))
 
         if dump:

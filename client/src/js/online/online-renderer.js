@@ -11,9 +11,9 @@ const renderOnline = (data) => {
 
   if (!data) {
     onlineContainer.innerText = "...";
-  }
 
-  data.players.sort((a, b) => parseInt(b.score, 10) - parseInt(a.score, 10));
+    return;
+  }
 
   onlineContainer.innerHTML = `
         <div>${data.gametype.toUpperCase()}</div>
