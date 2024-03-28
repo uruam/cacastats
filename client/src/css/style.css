@@ -22,6 +22,8 @@ div#wrapper {
   perspective: 7px;
 }
 
+/* header */
+
 header {
   background: linear-gradient(0.25turn, rgb(15, 15, 15), rgb(67, 67, 67));
   display: flex;
@@ -67,6 +69,8 @@ div#someText {
   padding-top: 10px;
 }
 
+/* section */
+
 section {
   padding-top: 30px;
   position: relative;
@@ -103,21 +107,6 @@ div#contentContainer a:hover {
   color: rgb(236, 236, 236);
 }
 
-div#onlineContainer div {
-  text-align: center;
-}
-
-div#onlineContainer span#refresh {
-  font-size: 25px;
-  vertical-align: middle;
-  line-height: 2;
-}
-
-div#onlineContainer ul {
-  display: block;
-  list-style-type: none;
-}
-
 button#sortButton {
   background-color: transparent;
   background-repeat: no-repeat;
@@ -128,6 +117,8 @@ button#sortButton {
   font-size: 21px;
   color: rgb(104, 127, 148);
 }
+
+/* table general */
 
 table {
   width: 100%;
@@ -177,6 +168,8 @@ tbody td:hover:before {
   background-color: rgba(255, 255, 255, 0.2);
   z-index: -1;
 }
+
+/* profile */
 
 table#profileTotal,
 table#profileWeapons {
@@ -258,11 +251,42 @@ div#profileMedalDataWrapper {
   padding-top: 6.66px;
 }
 
+/* online */
+
+div#onlineContainer div {
+  text-align: center;
+}
+
+div#onlineServerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 20px;
+}
+
+table#onlinePlayers th {
+  text-align: left;
+}
+
+div#onlineContainer div#refreshWrapper {
+  padding-top: 30px;
+}
+
+div#onlineContainer span#refresh {
+  font-size: 25px;
+  vertical-align: middle;
+  line-height: 2;
+}
+
+/* footer */
+
 footer {
   display: flex;
   justify-content: center;
   padding: 60px 10px 30px 10px;
 }
+
+/* colorized text */
 
 .text-black {
   color: rgb(0, 0, 0);
