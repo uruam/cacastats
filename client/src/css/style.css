@@ -278,6 +278,14 @@ div#onlineContainer span#refresh {
   line-height: 2;
 }
 
+/* info */
+
+div#infoWrapper {
+  max-width: 666px;
+  min-width: 333px;
+  padding: 0px 36px;
+}
+
 /* footer */
 
 footer {
