@@ -20,7 +20,6 @@ const renderOnline = (data) => {
 
   const table = document.createElement("table");
   table.id = "onlinePlayers";
-  const tableHeader = document.createElement("thead");
   const tableBody = document.createElement("tbody");
 
   const refreshDiv = document.createElement("div");
@@ -45,16 +44,6 @@ const renderOnline = (data) => {
 
   onlineContainer.appendChild(serverInfoDiv);
   onlineContainer.appendChild(table);
-
-  const tableHeaders = ["Name", "Ping", "Score"];
-  const headerRow = document.createElement("tr");
-  tableHeaders.forEach((headerText) => {
-    const th = document.createElement("th");
-    th.textContent = headerText;
-    headerRow.appendChild(th);
-  });
-  tableHeader.appendChild(headerRow);
-  table.appendChild(tableHeader);
 
   data.players.forEach((player) => {
     const row = document.createElement("tr");

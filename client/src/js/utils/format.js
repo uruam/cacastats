@@ -32,7 +32,7 @@ export const formatDate = (timestamp) => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${
+  const formattedDate = `${year}.${month < 10 ? "0" : ""}${month}.${
     day < 10 ? "0" : ""
   }${day}`;
 
@@ -42,7 +42,7 @@ export const formatDate = (timestamp) => {
 export const formatPeriod = (period) => {
   const { from } = period;
   const { till } = period;
-  const formattedPeriod = `${formatDate(from)} - ${formatDate(till)}`;
+  const formattedPeriod = `${formatDate(from)}-${formatDate(till)}`;
 
   return formattedPeriod;
 };
