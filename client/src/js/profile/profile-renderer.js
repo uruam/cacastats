@@ -215,11 +215,11 @@ const renderProfile = (data) => {
 
   const weaponsHeader = document.createElement("div");
   weaponsHeader.id = "profileWeaponsHeader";
-  weaponsHeader.innerText = "WEAPONS";
+  // weaponsHeader.innerText = "WEAPONS";
 
   const medalsHeader = document.createElement("div");
   medalsHeader.id = "profileMedalsHeader";
-  medalsHeader.innerText = "MEDALS";
+  // medalsHeader.innerText = "MEDALS";
 
   // Clear container before rendering
   someText.innerText = "";

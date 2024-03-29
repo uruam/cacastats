@@ -159,7 +159,7 @@ tbody td:hover {
   color: rgb(34, 37, 51);
 }
 
-tbody td:hover:before {
+tbody td:hover::before {
   content: "";
   position: absolute;
   left: 0;
@@ -221,13 +221,15 @@ div#profilePlayerName div#profilePlayerNameWrapper::after {
 
 div#profileWeaponsHeader {
   text-align: center;
-  padding: 30px 20px 20px 20px;
+  /* padding: 30px 20px 20px 20px; */
+  padding: 15px;
   font-size: 16px;
 }
 
 div#profileMedalsHeader {
   text-align: center;
-  padding: 30px 20px 6.66px 20px;
+  /* padding: 30px 20px 6.66px 20px; */
+  padding: 15px;
   font-size: 16px;
 }
 
@@ -256,17 +258,39 @@ div#profileMedalDataWrapper {
 
 div#onlineContainer div {
   text-align: center;
+  position: relative;
 }
 
 div#onlineServerInfo {
   display: flex;
   flex-direction: column;
+  min-width: 280px;
+  min-height: 210px;
   gap: 15px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgb(238, 238, 238);
+  background-color: rgba(111, 111, 111, 0.27) !important;
+  background-blend-mode: lighten !important;
+  background-size: cover !important;
+  background-position: center !important;
 }
 
-table#onlinePlayers th {
-  text-align: left;
+div#onlineMapName {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+div#onlineNumberOfPlayers {
+  padding-top: 40px;
+}
+
+table#onlinePlayers {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 div#onlineContainer div#refreshWrapper {
@@ -303,22 +327,22 @@ footer {
   color-scheme: only light;
 }
 .text-red {
-  color: rgb(255, 20, 20);
+  color: rgb(255, 40, 40);
 }
 .text-lime {
-  color: rgb(0, 255, 0);
+  color: rgb(26, 255, 26);
 }
 .text-yellow {
   color: rgb(255, 255, 0);
 }
 .text-blue {
-  color: rgb(22, 45, 255);
+  color: rgb(41, 127, 255);
 }
 .text-cyan {
   color: rgb(0, 255, 255);
 }
 .text-pink {
-  color: rgb(255, 36, 190);
+  color: rgb(255, 51, 194);
 }
 .text-white {
   color: rgb(255, 255, 255);

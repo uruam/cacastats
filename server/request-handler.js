@@ -11,6 +11,7 @@ const getContentType = (parsedUrl) => {
   if (parsedUrl.endsWith(".js")) return "text/javascript";
   if (parsedUrl.endsWith(".svg")) return "image/svg+xml";
   if (parsedUrl.endsWith(".png")) return "image/png";
+  if (parsedUrl.endsWith(".jpg")) return "image/jpeg";
 
   return null;
 };
@@ -70,7 +71,7 @@ const serveStaticFile = (parsedUrl, contentType, res) => {
 
   fs.readFile(
     file,
-    contentType !== "image/png" ? "utf8" : null,
+    contentType === "image/png" || contentType === "image/jpeg" ? null : "utf8",
     (error, data) => {
       if (error) {
         let statusCode = 500;

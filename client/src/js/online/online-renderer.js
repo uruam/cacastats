@@ -1,8 +1,12 @@
+import mapUrl from "../utils/get-map-url.js";
+
 const renderOnline = (data) => {
   const someText = document.getElementById("someText");
   someText.innerText = "ONLINE";
+
   const contentContainer = document.getElementById("contentContainer");
   const onlineContainer = document.createElement("div");
+
   onlineContainer.id = "onlineContainer";
   contentContainer.appendChild(onlineContainer);
 
@@ -14,9 +18,19 @@ const renderOnline = (data) => {
 
   const serverInfoDiv = document.createElement("div");
   serverInfoDiv.id = "onlineServerInfo";
+  serverInfoDiv.style.background = `url(${mapUrl(data.map)})`;
+
   const gameTypeDiv = document.createElement("div");
+  gameTypeDiv.textContent = data.gametype.toUpperCase();
+
   const mapDiv = document.createElement("div");
+  mapDiv.id = "onlineMapName";
+  // mapDiv.textContent = "am_galmevish-oa3";
+  mapDiv.textContent = data.map;
+
   const numberOfPlayersDiv = document.createElement("div");
+  numberOfPlayersDiv.id = "onlineNumberOfPlayers";
+  numberOfPlayersDiv.textContent = data.numberOfPlayers;
 
   const table = document.createElement("table");
   table.id = "onlinePlayers";
@@ -24,26 +38,21 @@ const renderOnline = (data) => {
 
   const refreshDiv = document.createElement("div");
   refreshDiv.id = "refreshWrapper";
+
   const refreshLink = document.createElement("a");
-  const refreshSpan = document.createElement("span");
-  refreshSpan.id = "refresh";
-
-  gameTypeDiv.textContent = data.gametype.toUpperCase();
-  mapDiv.textContent = data.map;
-  numberOfPlayersDiv.textContent = data.numberOfPlayers;
-
-  refreshSpan.textContent = "🔄";
   refreshLink.href = "/online";
   refreshLink.title = "REFRESH";
+
+  const refreshSpan = document.createElement("span");
+  refreshSpan.textContent = "🔄";
+  refreshSpan.id = "refresh";
+
   refreshLink.appendChild(refreshSpan);
   refreshDiv.appendChild(refreshLink);
 
   serverInfoDiv.appendChild(gameTypeDiv);
   serverInfoDiv.appendChild(mapDiv);
   serverInfoDiv.appendChild(numberOfPlayersDiv);
-
-  onlineContainer.appendChild(serverInfoDiv);
-  onlineContainer.appendChild(table);
 
   data.players.forEach((player) => {
     const row = document.createElement("tr");
@@ -54,8 +63,11 @@ const renderOnline = (data) => {
     });
     tableBody.appendChild(row);
   });
+
   table.appendChild(tableBody);
 
+  onlineContainer.appendChild(serverInfoDiv);
+  onlineContainer.appendChild(table);
   onlineContainer.appendChild(refreshDiv);
 };
 
