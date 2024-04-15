@@ -57,7 +57,7 @@ const parseOaqueryToJSON = (output) => {
 
 const serveStaticFile = (parsedUrl, contentType, res) => {
   const pathName = parsedUrl.pathname;
-  let file = `${dirname}/../client/dist${pathName}`;
+  let file = `${dirname}/dist${pathName}`;
 
   if (
     pathName === "/" ||
@@ -66,7 +66,7 @@ const serveStaticFile = (parsedUrl, contentType, res) => {
     pathName === "/links" ||
     pathName === "/info"
   ) {
-    file = `${dirname}/../client/dist/index.html`;
+    file = `${dirname}/dist/index.html`;
   }
 
   fs.readFile(
