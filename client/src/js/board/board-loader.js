@@ -1,4 +1,5 @@
-import backgroundImage from "../../assets/angelyss.svg";
+// import backgroundImage from "../../assets/angelyss.svg";
+import backgroundImage from "../../assets/smarine.svg";
 import renderBoard from "./board-renderer.js";
 
 const fetchBoardData = async () => {
