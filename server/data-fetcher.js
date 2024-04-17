@@ -1,7 +1,29 @@
-const fetchGameData = async (game) => {
-  const gameResponse = await fetch(`https://stats.dotsstuff.com/${game}`);
+/* eslint-disable no-promise-executor-return */
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  return gameResponse.json();
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000;
+
+const fetchGameData = async (game, retryCount = 0) => {
+  try {
+    const gameResponse = await fetch(`https://stats.dotsstuff.com/${game}`);
+
+    return gameResponse.json();
+  } catch (error) {
+    console.error(`Error fetching game data for ${game}:`, error);
+
+    if (retryCount < MAX_RETRIES) {
+      console.log(`Retrying fetch for ${game}...`);
+      await sleep(RETRY_DELAY);
+
+      return fetchGameData(game, retryCount + 1);
+    }
+    console.error(
+      `Failed to fetch data for ${game} after ${MAX_RETRIES} attempts.`,
+    );
+
+    return null;
+  }
 };
 
 const fetchGamesData = async () => {
@@ -26,24 +48,20 @@ const fetchGamesData = async () => {
       })
       .map((key) => ({ [key]: allGames[key] }));
 
-    const gamesDataPromises = [];
-
-    cacaGames.forEach((cacaGame) => {
-      const [game] = Object.keys(cacaGame);
-
-      if (game) {
-        gamesDataPromises.push(fetchGameData(game));
-      } else {
-        console.error(`No caca game found for: ${game}`);
-      }
-    });
-
     // Fetch all games data concurrently
-    const gamesDataResponses = await Promise.all(gamesDataPromises);
+    const gamesDataResponses = await Promise.all(
+      cacaGames.map((cacaGame) => {
+        const [game] = Object.keys(cacaGame);
 
-    return gamesDataResponses;
+        return game ? fetchGameData(game) : null;
+      }),
+    );
+
+    return gamesDataResponses.filter(Boolean);
   } catch (error) {
-    return console.error("Error fetching data:", error);
+    console.error("Error fetching data:", error);
+
+    return null;
   }
 };
 
