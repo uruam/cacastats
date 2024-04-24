@@ -95,6 +95,7 @@ const generateTotalStats = (data) => {
     if (
       key &&
       key !== "name" &&
+      key !== "time" &&
       key !== "period" &&
       key !== "weapons" &&
       key !== "awards"
@@ -113,6 +114,7 @@ const generateTotalStats = (data) => {
     if (
       key &&
       key !== "name" &&
+      key !== "time" &&
       key !== "period" &&
       key !== "weapons" &&
       key !== "awards"
@@ -216,6 +218,9 @@ const renderProfile = (data) => {
   playerNameWrapper.id = "profilePlayerNameWrapper";
   playerName.appendChild(playerNameWrapper);
 
+  const playerTime = document.createElement("div");
+  playerTime.id = "profilePlayerTime";
+
   const weaponsHeader = document.createElement("div");
   weaponsHeader.id = "profileWeaponsHeader";
   // weaponsHeader.innerText = "WEAPONS";
@@ -244,6 +249,10 @@ const renderProfile = (data) => {
 
   playerNameWrapper.innerHTML = colorizeText(data.name);
   contentContainer.appendChild(playerName);
+
+  playerTime.innerText = formatTime(data.time);
+  contentContainer.appendChild(playerTime);
+
   contentContainer.appendChild(generateTotalStats(data));
 
   contentContainer.appendChild(weaponsHeader);

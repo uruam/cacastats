@@ -109,6 +109,7 @@ div#contentContainer a:hover {
 }
 
 button#sortButton {
+  padding-right: 3px;
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
@@ -144,7 +145,7 @@ thead th {
 }
 
 thead th:first-child {
-  padding-top: 10px;
+  padding-top: 6px;
 }
 
 tbody tr:hover {
@@ -172,22 +173,34 @@ tbody td:hover::before {
 
 /* profile */
 
+table#profileTotal th,
+table#profileWeapons th {
+  padding: 10px 5px;
+}
+
+table#profileTotal td {
+  padding: 10px 4px;
+}
+
 table#profileTotal,
 table#profileWeapons {
   text-align: center;
-}
-
-table#profileTotal th:first-child,
-table#profileWeapons th:first-child {
-  padding-bottom: 10px;
 }
 
 div#profilePlayerName {
   display: flex;
   justify-content: center;
   text-align: center;
-  padding: 0px 20px 30px 20px;
+  padding: 0px 20px 25px 20px;
   font-size: 22px;
+}
+
+div#profilePlayerTime {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 20px 25px 20px;
+  font-size: 18px;
 }
 
 div#profilePlayerName div#profilePlayerNameWrapper {
@@ -221,14 +234,12 @@ div#profilePlayerName div#profilePlayerNameWrapper::after {
 
 div#profileWeaponsHeader {
   text-align: center;
-  /* padding: 30px 20px 20px 20px; */
   padding: 15px;
   font-size: 16px;
 }
 
 div#profileMedalsHeader {
   text-align: center;
-  /* padding: 30px 20px 6.66px 20px; */
   padding: 15px;
   font-size: 16px;
 }
