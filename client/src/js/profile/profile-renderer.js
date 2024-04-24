@@ -120,10 +120,13 @@ const generateTotalStats = (data) => {
       const cell = row.insertCell();
       cell.textContent = data[key];
 
-      if (key === "playtime") {
+      if (key === "score") {
+        cell.textContent = formatNumber(data[key]);
+      }
+      if (key === "time") {
         cell.textContent = formatTime(data[key]);
       }
-      if (key === "score") {
+      if (key === "wlr") {
         cell.textContent = formatNumber(data[key]);
       }
       if (["dg", "dt"].some((el) => el === key)) {

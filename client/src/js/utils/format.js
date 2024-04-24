@@ -10,8 +10,8 @@ export const formatNumber = (num) => {
     return parseFloat(formattedNum) + unit;
   }
 
-  // Formats numbers with commas for thousands
-  return num.toLocaleString();
+  // Formats numbers with commas for thousands and ensures two decimal places
+  return parseFloat(num.toFixed(2)).toLocaleString();
 };
 
 export const formatTime = (seconds) => {
@@ -23,7 +23,7 @@ export const formatTime = (seconds) => {
   const formattedMinutes = minutes > 0 ? `${minutes}m` : "";
   const formattedSeconds = remainingSeconds > 0 ? `${remainingSeconds}s` : "";
 
-  return `${formattedHours} ${formattedMinutes} ${formattedSeconds}`;
+  return `${formattedHours}${formattedMinutes}${formattedSeconds}`;
 };
 
 export const formatDate = (timestamp) => {

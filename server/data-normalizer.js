@@ -67,7 +67,13 @@ const normalizeData = async () => {
             // If the player already exists in the stats object,
             // update the stats
             playersStats[playerName].score += player.score;
-            playersStats[playerName].playtime += player.playtime;
+            playersStats[playerName].time += player.playtime;
+            playersStats[playerName].win += player.team === 1 ? 1 : 0;
+            playersStats[playerName].loss += player.team === 2 ? 1 : 0;
+            playersStats[playerName].wlr =
+              playersStats[playerName].loss > 0
+                ? playersStats[playerName].win / playersStats[playerName].loss
+                : playersStats[playerName].win;
             playersStats[playerName].kills += player.kills;
             playersStats[playerName].deaths += player.deaths;
             playersStats[playerName].dg += player.damage_given;
@@ -113,7 +119,10 @@ const normalizeData = async () => {
             playersStats[playerName] = {
               name: playerName,
               score: player.score,
-              playtime: player.playtime,
+              time: player.playtime,
+              win: player.team === 1 ? 1 : 0,
+              loss: player.team === 2 ? 1 : 0,
+              wlr: player.team === 1 ? 1 : 0,
               kills: player.kills,
               deaths: player.deaths,
               dg: player.damage_given,

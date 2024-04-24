@@ -234,7 +234,7 @@ div#profileMedalsHeader {
 }
 
 div#profileMedalsContainer {
-  max-width: 600px;
+  max-width: 777px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

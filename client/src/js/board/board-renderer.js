@@ -50,10 +50,13 @@ const generateBoard = (data, sortKey, sortOrder) => {
         } else {
           cell.textContent = obj[key];
 
-          if (key === "playtime") {
+          if (key === "score") {
+            cell.textContent = formatNumber(obj[key]);
+          }
+          if (key === "time") {
             cell.textContent = formatTime(obj[key]);
           }
-          if (key === "score") {
+          if (key === "wlr") {
             cell.textContent = formatNumber(obj[key]);
           }
           if (["dg", "dt"].some((el) => el === key)) {
