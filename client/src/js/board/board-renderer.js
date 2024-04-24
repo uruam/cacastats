@@ -1,6 +1,31 @@
 import { formatNumber, formatTime, formatPeriod } from "../utils/format.js";
 import colorizeText from "../utils/colorize-text.js";
 
+const getBoardHeaderName = (key) => {
+  const headerNames = {
+    wins: "WIN",
+    losses: "LOSS",
+    kills: "KILL",
+    deaths: "DEATH",
+  };
+
+  return headerNames[key] || key.toUpperCase();
+};
+
+const formatBoardCellContent = (key, value) => {
+  if (["score", "wlr", "kdr", "dg", "dt"].includes(key)) {
+    return formatNumber(value);
+  }
+  if (key === "time") {
+    return formatTime(value);
+  }
+  if (key === "acc") {
+    return `${value}%`;
+  }
+
+  return value;
+};
+
 const generateBoard = (data, sortKey, sortOrder) => {
   if (sortKey && sortOrder) {
     data.sort((a, b) => {
@@ -23,7 +48,7 @@ const generateBoard = (data, sortKey, sortOrder) => {
       sortButton.setAttribute("class", sortOrder);
       sortButton.setAttribute("data-sort-key", key.toLowerCase());
       sortButton.textContent = "↕️";
-      th.textContent = key.toUpperCase();
+      th.textContent = getBoardHeaderName(key);
 
       if (key !== "name") {
         th.appendChild(sortButton);
@@ -48,23 +73,7 @@ const generateBoard = (data, sortKey, sortOrder) => {
           cell.appendChild(link);
           isFirstCell = false;
         } else {
-          cell.textContent = obj[key];
-
-          if (key === "score") {
-            cell.textContent = formatNumber(obj[key]);
-          }
-          if (key === "time") {
-            cell.textContent = formatTime(obj[key]);
-          }
-          if (key === "wlr") {
-            cell.textContent = formatNumber(obj[key]);
-          }
-          if (["dg", "dt"].some((el) => el === key)) {
-            cell.textContent = formatNumber(obj[key]);
-          }
-          if (key === "acc") {
-            cell.textContent = `${obj[key]}%`;
-          }
+          cell.textContent = formatBoardCellContent(key, obj[key]);
         }
       }
     });

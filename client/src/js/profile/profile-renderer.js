@@ -85,67 +85,70 @@ const medalIconsObj = {
   vaporized,
 };
 
+const getTotalStatsHeaderName = (key) => {
+  const headerNames = {
+    wins: "WIN",
+    losses: "LOSS",
+    kills: "KILL",
+    deaths: "DEATH",
+  };
+
+  return headerNames[key] || key.toUpperCase();
+};
+
+const formatTotalStatsCellContent = (key, value) => {
+  if (["score", "wlr", "kdr", "dg", "dt"].includes(key)) {
+    return formatNumber(value);
+  }
+  if (key === "time") {
+    return formatTime(value);
+  }
+  if (key === "acc") {
+    return `${value}%`;
+  }
+
+  return value;
+};
+
 const generateTotalStats = (data) => {
   const table = document.createElement("table");
   table.id = "profileTotal";
+
+  const excludedKeys = ["name", "time", "period", "weapons", "awards"];
+  const keys = Object.keys(data).filter((key) => !excludedKeys.includes(key));
+
   const header = table.createTHead();
   const headerRow = header.insertRow();
-
-  Object.keys(data).forEach((key) => {
-    if (
-      key &&
-      key !== "name" &&
-      key !== "time" &&
-      key !== "period" &&
-      key !== "weapons" &&
-      key !== "awards"
-    ) {
-      const th = document.createElement("th");
-      th.textContent = key.toUpperCase();
-
-      headerRow.appendChild(th);
-    }
+  keys.forEach((key) => {
+    const th = document.createElement("th");
+    th.textContent = getTotalStatsHeaderName(key);
+    headerRow.appendChild(th);
   });
 
   const body = table.createTBody();
   const row = body.insertRow();
-
-  Object.keys(data).forEach((key) => {
-    if (
-      key &&
-      key !== "name" &&
-      key !== "time" &&
-      key !== "period" &&
-      key !== "weapons" &&
-      key !== "awards"
-    ) {
-      const cell = row.insertCell();
-      cell.textContent = data[key];
-
-      if (key === "score") {
-        cell.textContent = formatNumber(data[key]);
-      }
-      if (key === "time") {
-        cell.textContent = formatTime(data[key]);
-      }
-      if (key === "wlr") {
-        cell.textContent = formatNumber(data[key]);
-      }
-      if (["dg", "dt"].some((el) => el === key)) {
-        cell.textContent = formatNumber(data[key]);
-      }
-      if (key === "acc") {
-        cell.textContent = `${data[key]}%`;
-      }
-    }
+  keys.forEach((key) => {
+    const cell = row.insertCell();
+    cell.textContent = formatTotalStatsCellContent(key, data[key]);
   });
 
   return table;
 };
 
+const getWeaponsStatsHeaderName = (key) => {
+  const headerNames = {
+    kills: "KILL",
+    shots: "SHOT",
+    hits: "HIT",
+  };
+
+  return headerNames[key] || key.toUpperCase();
+};
+
 const generateWeaponsStats = (weaponsData) => {
   const table = document.createElement("table");
   table.id = "profileWeapons";
+
   const header = table.createTHead();
   const headerRow = header.insertRow();
 
@@ -153,9 +156,10 @@ const generateWeaponsStats = (weaponsData) => {
   firstTh.textContent = "💀";
   headerRow.appendChild(firstTh);
 
-  Object.keys(Object.values(weaponsData)[0]).forEach((key) => {
+  const keys = Object.keys(Object.values(weaponsData)[0]);
+  keys.forEach((key) => {
     const th = document.createElement("th");
-    th.textContent = key.toUpperCase();
+    th.textContent = getWeaponsStatsHeaderName(key);
     headerRow.appendChild(th);
   });
 
@@ -164,7 +168,6 @@ const generateWeaponsStats = (weaponsData) => {
   headerRow.appendChild(accTh);
 
   const body = table.createTBody();
-
   Object.keys(weaponsData).forEach((key, index) => {
     const row = body.insertRow();
     const weaponCell = row.insertCell();
@@ -223,11 +226,9 @@ const renderProfile = (data) => {
 
   const weaponsHeader = document.createElement("div");
   weaponsHeader.id = "profileWeaponsHeader";
-  // weaponsHeader.innerText = "WEAPONS";
 
   const medalsHeader = document.createElement("div");
   medalsHeader.id = "profileMedalsHeader";
-  // medalsHeader.innerText = "MEDALS";
 
   // Clear container before rendering
   someText.innerText = "";

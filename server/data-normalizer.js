@@ -68,14 +68,20 @@ const normalizeData = async () => {
             // update the stats
             playersStats[playerName].score += player.score;
             playersStats[playerName].time += player.playtime;
-            playersStats[playerName].win += player.team === 1 ? 1 : 0;
-            playersStats[playerName].loss += player.team === 2 ? 1 : 0;
+            playersStats[playerName].wins += player.team === 1 ? 1 : 0;
+            playersStats[playerName].losses += player.team === 2 ? 1 : 0;
             playersStats[playerName].wlr =
-              playersStats[playerName].loss > 0
-                ? playersStats[playerName].win / playersStats[playerName].loss
-                : playersStats[playerName].win;
+              playersStats[playerName].losses > 0
+                ? playersStats[playerName].wins /
+                  playersStats[playerName].losses
+                : playersStats[playerName].wins;
             playersStats[playerName].kills += player.kills;
             playersStats[playerName].deaths += player.deaths;
+            playersStats[playerName].kdr =
+              playersStats[playerName].deaths > 0
+                ? playersStats[playerName].kills /
+                  playersStats[playerName].deaths
+                : playersStats[playerName].kills;
             playersStats[playerName].dg += player.damage_given;
             playersStats[playerName].dt += player.damage_taken;
 
@@ -120,11 +126,13 @@ const normalizeData = async () => {
               name: playerName,
               score: player.score,
               time: player.playtime,
-              win: player.team === 1 ? 1 : 0,
-              loss: player.team === 2 ? 1 : 0,
+              wins: player.team === 1 ? 1 : 0,
+              losses: player.team === 2 ? 1 : 0,
               wlr: player.team === 1 ? 1 : 0,
               kills: player.kills,
               deaths: player.deaths,
+              kdr:
+                player.deaths > 0 ? player.kills / player.deaths : player.kills,
               dg: player.damage_given,
               dt: player.damage_taken,
               weapons: initWeaponEntries(player.weapons),
