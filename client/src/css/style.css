@@ -148,7 +148,7 @@ thead th:first-child {
 }
 
 tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 tbody td {
@@ -156,7 +156,7 @@ tbody td {
 }
 
 tbody td:hover {
-  color: rgb(34, 37, 51);
+  color: rgb(6, 6, 6);
 }
 
 tbody td:hover::before {
@@ -166,7 +166,7 @@ tbody td:hover::before {
   right: 0;
   top: -9999px;
   bottom: -9999px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.02);
   z-index: -1;
 }
 
@@ -327,7 +327,7 @@ footer {
   color-scheme: only light;
 }
 .text-red {
-  color: rgb(255, 40, 40);
+  color: rgb(255, 85, 85);
 }
 .text-lime {
   color: rgb(26, 255, 26);
@@ -342,7 +342,7 @@ footer {
   color: rgb(0, 255, 255);
 }
 .text-pink {
-  color: rgb(255, 51, 194);
+  color: rgb(255, 100, 194);
 }
 .text-white {
   color: rgb(255, 255, 255);
