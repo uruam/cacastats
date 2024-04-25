@@ -1,4 +1,4 @@
-import mapUrl from "../utils/get-map-url.js";
+import getMapUrl from "../utils/get-map-url.js";
 
 const renderOnline = (data) => {
   const someText = document.getElementById("someText");
@@ -18,7 +18,7 @@ const renderOnline = (data) => {
 
   const serverInfoDiv = document.createElement("div");
   serverInfoDiv.id = "onlineServerInfo";
-  serverInfoDiv.style.background = `url(${mapUrl(data.map)})`;
+  serverInfoDiv.style.background = `url(${getMapUrl(data.map)})`;
 
   const gameTypeDiv = document.createElement("div");
   gameTypeDiv.textContent = data.gametype.toUpperCase();

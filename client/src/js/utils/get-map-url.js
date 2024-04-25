@@ -150,12 +150,6 @@ const mapsObj = {
   unitooldm4: _unitooldm4,
 };
 
-const getMapUrl = (dataMap) => {
-  // eslint-disable-next-line no-param-reassign
-  // dataMap = "oacmpdm1";
-  const mapName = Object.keys(mapsObj).find((key) => key === dataMap);
-
-  return mapsObj[mapName] || _z;
-};
+const getMapUrl = (dataMap) => mapsObj[dataMap] || _z;
 
 export default getMapUrl;
