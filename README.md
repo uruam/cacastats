@@ -4,9 +4,9 @@ Web-based application designed to provide a comprehensive scoreboard and player 
 
 ## Requirement
 
-[Node.js](https://nodejs.org) 8.3.0 or higher
+[Node.js](https://nodejs.org) ≥ 8.3.0
 
-[Python](https://www.python.org) 3
+[Python](https://www.python.org) ≥ 3.0.0
 
 ## Installation
 
