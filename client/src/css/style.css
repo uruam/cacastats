@@ -23,6 +23,11 @@ div#wrapper {
   perspective: 7px;
 }
 
+div#headerWrapper {
+  position: sticky;
+  top: 0;
+}
+
 /* header */
 
 header {
