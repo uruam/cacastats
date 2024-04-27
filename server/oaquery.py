@@ -49,14 +49,14 @@ ARENA_COLORS = {
 
 ARENA_HTML_COLORS = {
         '0' : '000000',
-        '1' : 'ff0000',
-        '2' : '00ff00',
+        '1' : 'ff5555',
+        '2' : '1aff1a',
         '3' : 'ffff00',
-        '4' : '0000ff',
+        '4' : '297fff',
         '5' : '00ffff',
-        '6' : 'ff00ff',
+        '6' : 'ff64c2',
         '7' : 'ffffff',
-        '8' : 'ff6d00',
+        '8' : 'ffa500',
         }
 
 CHALLENGE_BYTES = 12
