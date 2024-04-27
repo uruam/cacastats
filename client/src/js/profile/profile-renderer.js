@@ -1,5 +1,5 @@
 import { formatNumber, formatTime, formatPeriod } from "../utils/format.js";
-import { getMedalImg, getMedalTitle } from "../utils/get-medal-data.js";
+import { getMedalImg, getMedalDescription } from "../utils/get-medal-data.js";
 import getWeaponImg from "../utils/get-weapon-img.js";
 import colorizeText from "../utils/colorize-text.js";
 import calculateAcc from "../utils/calculate-acc.js";
@@ -113,11 +113,11 @@ const generateMedalsStats = (medalsData) => {
   Object.keys(medalsData).forEach((key) => {
     const medalContainer = document.createElement("div");
     medalContainer.id = "profileMedalContainer";
+    medalContainer.setAttribute("tooltip", getMedalDescription(key));
 
     const medalImage = new Image();
     medalImage.src = getMedalImg(key);
     medalImage.id = "profileMedalImage";
-    medalImage.title = getMedalTitle(key);
     medalContainer.appendChild(medalImage);
 
     const medalData = document.createElement("div");

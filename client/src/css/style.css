@@ -260,6 +260,7 @@ div#profileMedalContainer {
   flex-basis: 16.666%;
   padding: 10px;
   text-align: center;
+  position: relative;
 }
 
 img#profileMedalImage {
@@ -268,6 +269,52 @@ img#profileMedalImage {
 
 div#profileMedalDataWrapper {
   padding-top: 6.66px;
+}
+
+/* medal tooltip */
+
+div#profileMedalContainer::before,
+div#profileMedalContainer::after {
+  --scale: 0;
+  --arrowSize: 10px;
+  --tooltipColor: rgb(34, 37, 51);
+
+  position: absolute;
+  top: 0.4rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translateY, 0))
+    scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom center;
+}
+
+div#profileMedalContainer::before {
+  --translateY: calc(-100% - var(--arrowSize));
+
+  content: attr(tooltip);
+  color: rgb(236, 236, 236);
+  padding: 6px 3px;
+  border-radius: 5px;
+  font-size: 15px;
+  word-wrap: break-word;
+  text-align: center;
+  width: max-content;
+  max-width: 100%;
+  background: var(--tooltipColor);
+}
+
+div#profileMedalContainer:hover::before,
+div#profileMedalContainer:hover::after {
+  --scale: 1;
+}
+
+div#profileMedalContainer::after {
+  --translateY: calc(-1 * var(--arrowSize));
+
+  content: "";
+  border: var(--arrowSize) solid transparent;
+  border-top-color: var(--tooltipColor);
+  transform-origin: top center;
 }
 
 /* online */
@@ -368,6 +415,7 @@ footer {
 }
 
 /* menu inspired by Kyle */
+
 /* MIT License
 Copyright (c) 2023 WebDevSimplified
 
@@ -504,4 +552,3 @@ div#navItem {
 label#burgerMenu:has(input:checked) + #sidebar {
   translate: 0;
 }
-/* end of menu */

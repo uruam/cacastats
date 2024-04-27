@@ -34,121 +34,140 @@ import vaporized from "../../assets/medals/vaporized.png";
 const medalIconsObj = {
   accuracy: {
     img: accuracy,
-    title: `Accuracy - Hit an opponent multiple times 
-with the same weapon and perfect accuracy`,
+    description:
+      "Accuracy. Hit an opponent multiple times with the same weapon and perfect accuracy",
   },
   airgrenade: {
     img: airgrenade,
-    title:
-      "Air-Nade - Hit an opponent with a grenade while they were in the air",
+    description:
+      "Air-Nade. Hit an opponent with a grenade while they were in the air",
   },
   airrocket: {
     img: airrocket,
-    title:
-      "Interdimensional - Fragged an opponent by firing through a teleporter",
+    description:
+      "Air-Rocket. Hit an opponent with a rocket while they were in the air",
   },
   ambush: {
     img: ambush,
-    title:
-      "Ambush - Fragged an opponent who just spawned or came through a portal",
+    description:
+      "Ambush. Fragged an opponent who just spawned or came through a portal",
   },
   berserker: {
     img: berserker,
-    title: "Berserker - Got 3 gaunt frags in a row without dying",
+    description: "Berserker. Got 3 gaunt frags in a row without dying",
   },
   bullseye: {
     img: bullseye,
-    title: "Rocket Sniper - Directly hit an opponent far away with a rocket",
+    description:
+      "Rocket Sniper. Directly hit an opponent far away with a rocket",
   },
-  butcher: { img: butcher, title: "Butcher - Gibbed a corpse using gauntlet" },
+  butcher: {
+    img: butcher,
+    description: "Butcher. Gibbed a corpse using gauntlet",
+  },
   deadhand: {
     img: deadhand,
-    title:
-      "Dead Hand - Fragged an opponent with a projectile fired prior to dying",
+    description:
+      "Dead Hand. Fragged an opponent with a projectile fired prior to dying",
   },
   excellent: {
     img: excellent,
-    title: "Excellent - Fragged two opponents within a short period of time",
+    description:
+      "Excellent. Fragged two opponents within a short period of time",
   },
   frags: {
     img: frags,
-    title: "Frags - Fragged three opponents with a short period of time",
+    description: "Frags. Fragged three opponents with a short period of time",
   },
-  fullsg: { img: fullsg, title: "Point Blank - Hit with all shotgun pellets" },
+  fullsg: {
+    img: fullsg,
+    description: "Point Blank. Hit with all shotgun pellets",
+  },
   grimreaper: {
     img: grimreaper,
-    title: "Grim Reaper - Maintained a 25-kill streak",
+    description: "Grim Reaper. Maintained a 25-kill streak",
   },
   humiliation: {
     img: humiliation,
-    title: "Humiliation - Fragged an opponent with gauntlet",
+    description: "Humiliation. Fragged an opponent with gauntlet",
   },
   immortality: {
     img: immortality,
-    title: "Immortality - Received 800 damage while staying alive",
+    description: "Immortality. Received 800 damage while staying alive",
   },
-  impressive: { img: impressive, title: "Impressive - Hit two rails in a row" },
+  impressive: {
+    img: impressive,
+    description: "Impressive. Hit two rails in a row",
+  },
   kamikaze: {
     img: kamikaze,
-    title: "Kamikaze - Fragged an opponent while taking his own life",
+    description: "Kamikaze. Fragged an opponent while taking his own life",
   },
   killingspree: {
     img: killingspree,
-    title: "Killing Spree - Maintained a 5-kill streak",
+    description: "Killing Spree. Maintained a 5-kill streak",
   },
   lgrail: {
     img: lgrail,
-    title: `Combo Kill (Lightning -> Rail) - Fragged an opponent by dealing 
-lightning damage first and then finishing them off with a rail slug`,
+    description:
+      "Combo Kill (Lightning - Rail). Fragged an opponent by dealing lightning damage first and then finishing them off with a rail slug",
   },
-  massacre: { img: massacre, title: "Massacre - Maintained a 15-kill streak" },
+  massacre: {
+    img: massacre,
+    description: "Massacre. Maintained a 15-kill streak",
+  },
   railtwo: {
     img: railtwo,
-    title: "Rail Master - Shot through two opponents with a single rail slug",
+    description:
+      "Rail Master. Shot through two opponents with a single rail slug",
   },
-  rat: { img: rat, title: "Rat - Displayed rat-like behavior" },
-  rampage: { img: rampage, title: "Rampage - Maintained a 10-kill streak" },
+  rat: { img: rat, description: "Rat. Displayed rat-like behavior" },
+  rampage: {
+    img: rampage,
+    description: "Rampage. Maintained a 10-kill streak",
+  },
   revenge: {
     img: revenge,
-    title:
-      "Revenge - Fragged the opponent who fragged them quickly after respawn",
+    description:
+      "Revenge. Fragged the opponent who fragged them quickly after respawn",
   },
   rocketrail: {
     img: rocketrail,
-    title: `Combo Kill (Rocket -> Rail) - Made an opponent fly into 
-the air with a rocket, then fragged them with a rail slug`,
+    description:
+      "Combo Kill (Rocket - Rail). Made an opponent fly into the air with a rocket, then fragged them with a rail slug",
   },
   stopper: {
     img: stopper,
-    title: "Show Stopper - Fragged someone who had a powerup",
+    description: "Show Stopper. Fragged someone who had a powerup",
   },
   strongman: {
     img: strongman,
-    title: "Strongman - Fragged all of the enemy team on your own",
+    description: "Strongman. Fragged all of the enemy team on your own",
   },
   telefrag: {
     img: telefrag,
-    title: "Telefrag - Teleported into another player's personal space",
+    description: "Telefrag. Teleported into another player's personal space",
   },
   telemissile_frag: {
     img: telemissile_frag,
-    title:
-      "Interdimensional - Fragged an opponent by firing through a teleporter",
+    description:
+      "Interdimensional. Fragged an opponent by firing through a teleporter",
   },
   twitchrail: {
     img: twitchrail,
-    title: "Aimbot - Turned very quickly and hit an opponent with railgun",
+    description: "Aimbot. Turned very quickly and hit an opponent with railgun",
   },
   unstoppable: {
     img: unstoppable,
-    title: "Unstoppable - Maintained a 20-kill streak",
+    description: "Unstoppable. Maintained a 20-kill streak",
   },
   vaporized: {
     img: vaporized,
-    title: `Vaporized - Fragged an opponent by doing 
-more than 100 plasma damage within 800ms`,
+    description:
+      "Vaporized. Fragged an opponent by doing more than 100 plasma damage within 800ms",
   },
 };
 
 export const getMedalImg = (key) => medalIconsObj[key]?.img || "";
-export const getMedalTitle = (key) => medalIconsObj[key]?.title || "";
+export const getMedalDescription = (key) =>
+  medalIconsObj[key]?.description || "";
