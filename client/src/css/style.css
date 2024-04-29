@@ -115,14 +115,21 @@ div#contentContainer a:hover {
 
 button#sortButton {
   padding-right: 3px;
+  padding-bottom: 0px;
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
   overflow: hidden;
   outline: none;
-  font-size: 21px;
+  font-size: 18px;
   color: rgb(104, 127, 148);
+}
+
+@media screen and (max-width: 1023px) {
+  button#sortButton {
+    font-size: 22px;
+  }
 }
 
 /* table general */

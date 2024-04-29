@@ -47,7 +47,7 @@ const generateBoard = (data, sortKey, sortOrder) => {
       sortButton.setAttribute("id", "sortButton");
       sortButton.setAttribute("class", sortOrder);
       sortButton.setAttribute("data-sort-key", key.toLowerCase());
-      sortButton.textContent = "↕️";
+      sortButton.textContent = "⬍";
       th.textContent = getBoardHeaderName(key);
 
       if (key !== "name") {
