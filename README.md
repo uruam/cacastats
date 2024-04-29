@@ -18,28 +18,10 @@ Clone the repository
 git clone https://github.com/uruam/caca.gg.git
 ```
 
-Navigate to the client folder
-
-```
-cd caca.gg/client
-```
-
-Install dependencies
-
-```
-npm install
-```
-
-Transcompile and bundle the client code
-
-```
-npm run build
-```
-
 Navigate to the server directory
 
 ```
-cd ../server
+cd caca.gg/server
 ```
 
 Install server dependencies
@@ -52,6 +34,30 @@ Start the server
 
 ```
 npm run start
+```
+
+Navigate to the client folder
+
+```
+cd ../client
+```
+
+Install dependencies
+
+```
+npm install
+```
+
+Automatically transcompile and bundle the client code during development whenever source files change
+
+```
+npm run dev
+```
+
+Transcompile and bundle the client code for production deployment
+
+```
+npm run build
 ```
 
 ## Usage

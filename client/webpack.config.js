@@ -5,7 +5,6 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  mode: "production",
   entry: "./src/js/index.js",
   plugins: [
     new HtmlWebpackPlugin({
