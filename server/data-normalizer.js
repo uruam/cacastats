@@ -67,28 +67,43 @@ const normalizeData = async () => {
             // If the player already exists in the stats object,
             // update the stats
             playersStats[playerName].score += player.score;
+
             playersStats[playerName].time += player.playtime;
+
             playersStats[playerName].wins += player.team === 1 ? 1 : 0;
+
             playersStats[playerName].losses += player.team === 2 ? 1 : 0;
+
             playersStats[playerName].wlr =
               playersStats[playerName].losses > 0
                 ? playersStats[playerName].wins /
                   playersStats[playerName].losses
                 : playersStats[playerName].wins;
+
             playersStats[playerName].kills += player.kills;
+
             playersStats[playerName].deaths += player.deaths;
+
             playersStats[playerName].kdr =
               playersStats[playerName].deaths > 0
                 ? playersStats[playerName].kills /
                   playersStats[playerName].deaths
                 : playersStats[playerName].kills;
+
             playersStats[playerName].dg += player.damage_given;
+
             playersStats[playerName].dt += player.damage_taken;
+
+            playersStats[playerName].dgdtr =
+              playersStats[playerName].dt > 0
+                ? playersStats[playerName].dg / playersStats[playerName].dt
+                : playersStats[playerName].dg;
 
             Object.keys(player.weapons).forEach((weaponId) => {
               if (!playersStats[playerName].weapons) {
                 playersStats[playerName].weapons = {};
               }
+
               if (!playersStats[playerName].weapons[weaponId]) {
                 playersStats[playerName].weapons[weaponId] = {
                   kills: 0,
@@ -97,12 +112,16 @@ const normalizeData = async () => {
                   damage: 0,
                 };
               }
+
               playersStats[playerName].weapons[weaponId].kills +=
                 player.weapons[weaponId].kills;
+
               playersStats[playerName].weapons[weaponId].shots +=
                 player.weapons[weaponId].shots;
+
               playersStats[playerName].weapons[weaponId].hits +=
                 player.weapons[weaponId].hits;
+
               playersStats[playerName].weapons[weaponId].damage +=
                 player.weapons[weaponId].damage;
             });
@@ -135,6 +154,10 @@ const normalizeData = async () => {
                 player.deaths > 0 ? player.kills / player.deaths : player.kills,
               dg: player.damage_given,
               dt: player.damage_taken,
+              dgdtr:
+                player.damage_taken > 0
+                  ? player.damage_given / player.damage_taken
+                  : player.damage_given,
               weapons: initWeaponEntries(player.weapons),
               awards: player.awards,
               acc: calculateTotalAcc(initWeaponEntries(player.weapons)),

@@ -1,30 +1,9 @@
-import { formatNumber, formatTime, formatPeriod } from "../utils/format.js";
+import {
+  formatPeriod,
+  formatBoardHeader,
+  formatBoardCellContent,
+} from "../utils/format.js";
 import colorizeText from "../utils/colorize-text.js";
-
-const getBoardHeaderName = (key) => {
-  const headerNames = {
-    wins: "WIN",
-    losses: "LOSS",
-    kills: "KILL",
-    deaths: "DEATH",
-  };
-
-  return headerNames[key] || key.toUpperCase();
-};
-
-const formatBoardCellContent = (key, value) => {
-  if (["score", "wlr", "kdr", "dg", "dt"].includes(key)) {
-    return formatNumber(value);
-  }
-  if (key === "time") {
-    return formatTime(value);
-  }
-  if (key === "acc") {
-    return `${value}%`;
-  }
-
-  return value;
-};
 
 const generateBoard = (data, sortKey, sortOrder) => {
   if (sortKey && sortOrder) {
@@ -48,7 +27,7 @@ const generateBoard = (data, sortKey, sortOrder) => {
       sortButton.setAttribute("class", sortOrder);
       sortButton.setAttribute("data-sort-key", key.toLowerCase());
       sortButton.textContent = "⬍";
-      th.textContent = getBoardHeaderName(key);
+      th.textContent = formatBoardHeader(key);
 
       if (key !== "name") {
         th.appendChild(sortButton);

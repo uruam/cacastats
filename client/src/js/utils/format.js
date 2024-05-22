@@ -46,3 +46,41 @@ export const formatPeriod = (period) => {
 
   return formattedPeriod;
 };
+
+export const formatBoardHeader = (key) => {
+  const headers = {
+    wins: "WIN",
+    losses: "LOSS",
+    wlr: "W/L",
+    kills: "KILL",
+    deaths: "DEATH",
+    kdr: "K/D",
+    dgdtr: "DG/DT",
+  };
+
+  return headers[key] || key.toUpperCase();
+};
+
+export const formatBoardCellContent = (key, value) => {
+  if (["score", "wlr", "kdr", "dg", "dt", "dgdtr"].includes(key)) {
+    return formatNumber(value);
+  }
+  if (key === "time") {
+    return formatTime(value);
+  }
+  if (key === "acc") {
+    return `${value}%`;
+  }
+
+  return value;
+};
+
+export const formatWeaponsStatsHeaderName = (key) => {
+  const headerNames = {
+    kills: "KILL",
+    shots: "SHOT",
+    hits: "HIT",
+  };
+
+  return headerNames[key] || key.toUpperCase();
+};

@@ -1,43 +1,15 @@
-import { formatNumber, formatTime, formatPeriod } from "../utils/format.js";
+import {
+  formatNumber,
+  formatTime,
+  formatPeriod,
+  formatBoardHeader,
+  formatBoardCellContent,
+  formatWeaponsStatsHeaderName,
+} from "../utils/format.js";
 import { getMedalImg, getMedalDescription } from "../utils/get-medal-data.js";
 import getWeaponImg from "../utils/get-weapon-img.js";
 import colorizeText from "../utils/colorize-text.js";
 import calculateAcc from "../utils/calculate-acc.js";
-
-const getTotalStatsHeaderName = (key) => {
-  const headerNames = {
-    wins: "WIN",
-    losses: "LOSS",
-    kills: "KILL",
-    deaths: "DEATH",
-  };
-
-  return headerNames[key] || key.toUpperCase();
-};
-
-const getWeaponsStatsHeaderName = (key) => {
-  const headerNames = {
-    kills: "KILL",
-    shots: "SHOT",
-    hits: "HIT",
-  };
-
-  return headerNames[key] || key.toUpperCase();
-};
-
-const formatTotalStatsCellContent = (key, value) => {
-  if (["score", "wlr", "kdr", "dg", "dt"].includes(key)) {
-    return formatNumber(value);
-  }
-  if (key === "time") {
-    return formatTime(value);
-  }
-  if (key === "acc") {
-    return `${value}%`;
-  }
-
-  return value;
-};
 
 const generateTotalStats = (data) => {
   const table = document.createElement("table");
@@ -50,7 +22,7 @@ const generateTotalStats = (data) => {
   const headerRow = header.insertRow();
   keys.forEach((key) => {
     const th = document.createElement("th");
-    th.textContent = getTotalStatsHeaderName(key);
+    th.textContent = formatBoardHeader(key);
     headerRow.appendChild(th);
   });
 
@@ -58,7 +30,7 @@ const generateTotalStats = (data) => {
   const row = body.insertRow();
   keys.forEach((key) => {
     const cell = row.insertCell();
-    cell.textContent = formatTotalStatsCellContent(key, data[key]);
+    cell.textContent = formatBoardCellContent(key, data[key]);
   });
 
   return table;
@@ -78,7 +50,7 @@ const generateWeaponsStats = (weaponsData) => {
   const keys = Object.keys(Object.values(weaponsData)[0]);
   keys.forEach((key) => {
     const th = document.createElement("th");
-    th.textContent = getWeaponsStatsHeaderName(key);
+    th.textContent = formatWeaponsStatsHeaderName(key);
     headerRow.appendChild(th);
   });
 
