@@ -11,6 +11,7 @@ const loadNews = () => {
     { url: "https://stats.dotsstuff.com", text: "ratstats" },
     { url: "https://matrix.to/#/#ratarena:matrix.org", text: "matrix" },
     { url: "https://discord.gg/WGep6mSCD4", text: "/N/" },
+    { url: "https://www.youtube.com/@cacadotgg", text: "YT" },
   ];
 
   linksData.forEach((linkData) => {
