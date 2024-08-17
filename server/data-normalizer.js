@@ -56,6 +56,10 @@ const normalizeData = async () => {
       if (hasBotPlayers(game.players)) return;
       amountOfGamesNoBots += 1;
 
+      // Determine the winning team
+      // team 1 is red, team 2 is blue
+      const winningTeam = game.score_red > game.score_blue ? 1 : 2;
+
       // Parse player stats for the current game
       game.players.forEach((player) => {
         const playerName = player.name;
@@ -70,9 +74,11 @@ const normalizeData = async () => {
 
             playersStats[playerName].time += player.playtime;
 
-            playersStats[playerName].wins += player.team === 1 ? 1 : 0;
+            playersStats[playerName].wins +=
+              player.team === winningTeam ? 1 : 0;
 
-            playersStats[playerName].losses += player.team === 2 ? 1 : 0;
+            playersStats[playerName].losses +=
+              player.team !== winningTeam ? 1 : 0;
 
             playersStats[playerName].wlr =
               playersStats[playerName].losses > 0
@@ -145,9 +151,9 @@ const normalizeData = async () => {
               name: playerName,
               score: player.score,
               time: player.playtime,
-              wins: player.team === 1 ? 1 : 0,
-              losses: player.team === 2 ? 1 : 0,
-              wlr: player.team === 1 ? 1 : 0,
+              wins: player.team === winningTeam ? 1 : 0,
+              losses: player.team !== winningTeam ? 1 : 0,
+              wlr: player.team === winningTeam ? 1 : 0,
               kills: player.kills,
               deaths: player.deaths,
               kdr:
