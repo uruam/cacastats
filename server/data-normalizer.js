@@ -105,6 +105,11 @@ const normalizeData = async () => {
                 ? playersStats[playerName].dg / playersStats[playerName].dt
                 : playersStats[playerName].dg;
 
+            playersStats[playerName].hdg = Math.max(
+              playersStats[playerName].hdg,
+              player.damage_given,
+            );
+
             Object.keys(player.weapons).forEach((weaponId) => {
               if (!playersStats[playerName].weapons) {
                 playersStats[playerName].weapons = {};
@@ -164,6 +169,7 @@ const normalizeData = async () => {
                 player.damage_taken > 0
                   ? player.damage_given / player.damage_taken
                   : player.damage_given,
+              hdg: player.damage_given,
               weapons: initWeaponEntries(player.weapons),
               awards: player.awards,
               acc: calculateTotalAcc(initWeaponEntries(player.weapons)),

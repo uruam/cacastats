@@ -62,7 +62,19 @@ export const formatBoardHeader = (key) => {
 };
 
 export const formatBoardCellContent = (key, value) => {
-  if (["score", "wlr", "kdr", "dg", "dt", "dgdtr"].includes(key)) {
+  if (
+    [
+      "score",
+      "wlr",
+      "kills",
+      "deaths",
+      "kdr",
+      "dg",
+      "dt",
+      "dgdtr",
+      "hdg",
+    ].includes(key)
+  ) {
     return formatNumber(value);
   }
   if (key === "time") {
