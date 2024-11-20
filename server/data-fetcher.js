@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 /* eslint-disable no-promise-executor-return */
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -6,7 +10,7 @@ const RETRY_DELAY = 1000;
 
 const fetchGameData = async (game, retryCount = 0) => {
   try {
-    const gameResponse = await fetch(`https://stats.dotsstuff.com/${game}`);
+    const gameResponse = await fetch(`${process.env.API_URL}/${game}`);
 
     return gameResponse.json();
   } catch (error) {
@@ -30,10 +34,10 @@ const fetchGamesData = async () => {
   console.log("Started fetching data");
 
   try {
-    const response = await fetch("https://stats.dotsstuff.com/matches.json");
+    const response = await fetch(`${process.env.API_URL}/matches.json`);
 
     if (!response.ok) {
-      throw new Error("No stuff from dots");
+      throw new Error("No data from api");
     }
     const allGames = await response.json();
 
