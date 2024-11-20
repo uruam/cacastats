@@ -18,7 +18,7 @@ Clone the repository
 git clone https://github.com/uruam/caca.gg.git
 ```
 
-Navigate to the server directory
+Navigate to the `server` directory
 
 ```
 cd caca.gg/server
@@ -30,13 +30,19 @@ Install server dependencies
 npm install
 ```
 
+Create a `.env` file in the `server` directory and add your `API_URL` environment variable, where the `matches.json` file is located. For example:
+
+```
+API_URL=https://my-rat-server.com/
+```
+
 Start the server
 
 ```
 npm run start
 ```
 
-Navigate to the client folder
+Navigate to the `client` folder
 
 ```
 cd ../client
