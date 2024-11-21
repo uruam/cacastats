@@ -160,6 +160,14 @@ thead th:first-child {
   padding-top: 6px;
 }
 
+thead th a {
+  color: rgb(221, 221, 221) !important;
+}
+
+thead th a:hover {
+  color: rgb(255, 125, 235) !important;
+}
+
 tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }

@@ -30,7 +30,7 @@ const generateBoard = (data, sortKey, sortOrder) => {
       th.textContent = formatBoardHeader(key);
 
       if (key === "hdg") {
-        th.innerText = "HDG*";
+        th.innerHTML = `<a href="/info">HDG*</a>`;
       }
 
       if (key !== "name") {
@@ -68,8 +68,6 @@ const generateBoard = (data, sortKey, sortOrder) => {
 const renderBoard = (data, sortKey, sortOrder) => {
   const someText = document.getElementById("someText");
   const contentContainer = document.getElementById("contentContainer");
-  const note = document.createElement("p");
-  note.innerText = "* Highest Damage Given in a Single Game";
 
   // Clear container before rendering
   someText.innerText = "";
@@ -91,7 +89,6 @@ const renderBoard = (data, sortKey, sortOrder) => {
 
   someText.innerText = formatPeriod(data[0].period);
   contentContainer.appendChild(generateBoard(data, sortKey, sortOrder));
-  contentContainer.appendChild(note);
 };
 
 export default renderBoard;
