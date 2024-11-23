@@ -32,11 +32,11 @@ export const updateDataFile = async (byCron) => {
 export const scheduleDataUpdate = () => {
   // Every minute
   // const cronSchedule = "* * * * *";
-  // At the start of every 6th hour
-  // const cronSchedule = '0 */6 * * *';
-
   // Every hour
-  const cronSchedule = "0 * * * *";
+  // const cronSchedule = "0 * * * *";
+  // Every 6 hours starting from midnight
+  const cronSchedule = "0 */6 * * *";
+
   const updateJob = new CronJob(cronSchedule, () => updateDataFile(true));
   updateJob.start();
 };
