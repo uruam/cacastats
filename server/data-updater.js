@@ -35,7 +35,10 @@ export const scheduleDataUpdate = () => {
   // Every hour
   // const cronSchedule = "0 * * * *";
   // Every 6 hours starting from midnight
-  const cronSchedule = "0 */6 * * *";
+  // const cronSchedule = "0 */6 * * *";
+
+  // At 8 AM, 9 AM, and 10 AM
+  const cronSchedule = "0 8,9,10 * * *";
 
   const updateJob = new CronJob(cronSchedule, () => updateDataFile(true));
   updateJob.start();
