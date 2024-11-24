@@ -22,6 +22,7 @@ module.exports = {
       patterns: [
         { from: "src/assets/favicon.ico", to: "favicon.ico" },
         { from: "src/assets/apple-touch-icon.png", to: "apple-touch-icon.png" },
+        { from: "src/robots.txt", to: "robots.txt" },
       ],
     }),
   ],
