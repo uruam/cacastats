@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+* {
+  scrollbar-color: #555 #2e2e2e; /* firefox */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+::-webkit-scrollbar-track {
+  background: #2e2e2e;
+}
+
 body {
   margin: 0;
   font-size: 17px;
