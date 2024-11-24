@@ -225,18 +225,18 @@ class ArenaString:
     def normalize(self):
         normalized = self.strip()
         # remove color, collapse spaces
-        normalized.s = re.sub("\s+", " ", normalized.getstr(color=False))
+        normalized.s = re.sub(r"\s+", " ", normalized.getstr(color=False))
         return normalized
 
     def getstr(self, color=False):
-        pat = "\^[0-8]"
+        pat = r"\^[0-8]"
         if color:
             return ARENA_COLORS['7'] + re.sub(pat, termcolor, self.s) + COLOR_RESET
         return re.sub(pat, "", self.s)
 
     def gethtml(self, palette=ARENA_HTML_COLORS):
         res = []
-        pat = "\^[0-8]"
+        pat = r"\^[0-8]"
         lastidx = 0
         res.append(_html_fonttag(palette['7']))
         for match in re.finditer(pat, self.s):
