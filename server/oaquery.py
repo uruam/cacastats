@@ -28,7 +28,7 @@ import re
 import enum
 import html
 import ipaddress
-
+import json
 import argparse
 
 RESPONSE_TIMEOUT = 1.0
@@ -49,14 +49,14 @@ ARENA_COLORS = {
 
 ARENA_HTML_COLORS = {
         '0' : '000000',
-        '1' : 'ff5555',
-        '2' : '1aff1a',
+        '1' : 'ff0000',
+        '2' : '00ff00',
         '3' : 'ffff00',
-        '4' : '297fff',
+        '4' : '0000ff',
         '5' : '00ffff',
-        '6' : 'ff64c2',
+        '6' : 'ff00ff',
         '7' : 'ffffff',
-        '8' : 'ffa500',
+        '8' : 'ff6d00',
         }
 
 CHALLENGE_BYTES = 12
@@ -262,6 +262,15 @@ class ArenaString:
         for (tag, fragment) in zip(itertools.islice(lst, 1, None, 2),
                                    itertools.islice(lst, 2, None, 2)):
             yield (tag.lstrip('^'), fragment)
+
+    def tag_str_dicts(self):
+        return [
+                {
+                 'colortag': tag,
+                 'text': s
+                }
+                for (tag, s) in self.tag_str_pairs()
+            ]
 
 class Player:
     def __init__(self, name, score=0, ping=0):
@@ -672,22 +681,21 @@ class ArenaError(Exception):
         self.message = message
         
 def query_master(addrs, timeout=RESPONSE_TIMEOUT, retries=QUERY_RETRIES, empty=True, random_sport=False):
-    sock = create_socket(random_sport)
+    with create_socket(random_sport) as sock:
+        dispatcher = QueryDispatcher(sock)
+        for (ip, port) in addrs:
+            dispatcher.insert(MasterQuery(ip, port, empty))
 
-    dispatcher = QueryDispatcher(sock)
-    for (ip, port) in addrs:
-        dispatcher.insert(MasterQuery(ip, port, empty))
+        dispatcher.getservers()
+        while not dispatcher.recv(timeout) and retries > 0:
+            retries -= 1
+            dispatcher.retry()
 
-    dispatcher.getservers()
-    while not dispatcher.recv(timeout) and retries > 0:
-        retries -= 1
-        dispatcher.retry()
+        for query in dispatcher.master_queries():
+            if query.pending():
+                print("Warning: did not receive a valid getservers response from master {}".format(query.addr()), file=sys.stderr)
 
-    for query in dispatcher.master_queries():
-        if query.pending():
-            print("Warning: did not receive a valid getservers response from master {}".format(query.addr()), file=sys.stderr)
-
-    return dispatcher.collect_master()
+        return dispatcher.collect_master()
 
 def print_addrs(addrs, sort=False):
     if sort:
@@ -719,25 +727,24 @@ def filter_addrs(addrs, exclude_ips, include_ips):
     return addrs_filtered
 
 def query_servers(addrs, timeout=RESPONSE_TIMEOUT, retries=QUERY_RETRIES, random_sport=False):
-    sock = create_socket(random_sport)
+    with create_socket(random_sport) as sock:
+        dispatcher = QueryDispatcher(sock)
+        for (ip, port) in addrs:
+            dispatcher.insert(ServerQuery(ip, port))
 
-    dispatcher = QueryDispatcher(sock)
-    for (ip, port) in addrs:
-        dispatcher.insert(ServerQuery(ip, port))
+        dispatcher.getinfo()
+        dispatcher.getstatus()
+        while not dispatcher.recv(timeout) and retries > 0:
+            retries -= 1
+            dispatcher.retry()
 
-    dispatcher.getinfo()
-    dispatcher.getstatus()
-    while not dispatcher.recv(timeout) and retries > 0:
-        retries -= 1
-        dispatcher.retry()
+        for query in dispatcher.server_queries():
+            if query.pending_info():
+                print("Warning: did not receive a valid info response from {}".format(query.addr()), file=sys.stderr)
+            if query.pending_status():
+                print("Warning: did not receive a valid status response from {}".format(query.addr()), file=sys.stderr)
 
-    for query in dispatcher.server_queries():
-        if query.pending_info():
-            print("Warning: did not receive a valid info response from {}".format(query.addr()), file=sys.stderr)
-        if query.pending_status():
-            print("Warning: did not receive a valid status response from {}".format(query.addr()), file=sys.stderr)
-
-    return dispatcher.collect()
+        return dispatcher.collect()
 
 def pretty_print(serverinfos, show_empty=False, colors=False, bots=False, sort=False,
         gametype_filter=None, mod=False, mods_filter=None, dump=False, ping=False):
@@ -813,8 +820,7 @@ def pretty_print(serverinfos, show_empty=False, colors=False, bots=False, sort=F
             fields.append(''.rjust(just))
             fields.append("{:4}".format(p.score))
             fields.append("{:4}ms".format(p.ping))
-            # fields.append(p.name.getstr(colors))
-            fields.append(p.name.gethtml())
+            fields.append(p.name.getstr(colors))
             print(' '.join(fields))
 
         if dump:
@@ -846,6 +852,43 @@ def players_print(serverinfos, colors=False, bots=False,
             fields.append(info.name().strip().getstr(colors))
             print(' '.join(fields))
 
+def json_print(serverinfos, pretty=True):
+    jsondata = {
+            'servers': []
+            }
+    serverinfos = sorted(serverinfos, key=lambda x: x.num_humans(), reverse=True)
+    for info in serverinfos:
+        jsonserver = {
+                'address': info.saddr(),
+                'clean_name': info.name().strip().getstr(color=False),
+                'parsed_name': info.name().strip().tag_str_dicts(),
+                'gametype': {
+                    'str': str(info.gametype()),
+                    'num': info.gametypenum(),
+                    },
+                'map': info.map(),
+                'ping': info.ping,
+                'players': [],
+                }
+        players = sorted(info.all_players(), key=lambda p: p.score, reverse=True)
+        for p in players:
+            jsonserver['players'].append(
+                {
+                    'clean_name': p.name.strip().getstr(color=False),
+                    'parsed_name': p.name.strip().tag_str_dicts(),
+                    'score': p.score,
+                    'ping': p.ping,
+                    'likely_human': p.likely_human(),
+                }
+                )
+
+        jsondata['servers'].append(jsonserver)
+
+    if pretty:
+        print(json.dumps(jsondata, indent=4))
+    else:
+        print(json.dumps(jsondata))
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Query OpenArena servers.')
@@ -873,6 +916,9 @@ if __name__ == '__main__':
             help='Do not query specific game server IPs (use together with -a)')
     parser.add_argument('--timeout', metavar='SECONDS', type=float, default=RESPONSE_TIMEOUT, help='timeout, in seconds')
     parser.add_argument('--retries', type=int, default=QUERY_RETRIES, help='number of retries')
+    parser.add_argument('--json', action='store_true',
+            help='produce JSON output. Output filtering/formatting options (--filter-mods, --players, etc.) will be ignored.')
+    parser.add_argument('--json-pretty', action='store_true', help='Make JSON output pretty.')
     parser.add_argument('--dump', action='store_true', help='dump complete list of info/status response variables')
     parser.add_argument('--random-sport', action='store_true', default=False, help='use a random source port by default')
     args = parser.parse_args()
@@ -939,6 +985,11 @@ if __name__ == '__main__':
     server_addresses = filter_addrs(server_addresses, args.ip_exclude, args.ip_include)
 
     server_infos = query_servers(server_addresses, args.timeout, args.retries, args.random_sport)
+
+    if args.json:
+        json_print(server_infos, args.json_pretty)
+        sys.exit(0)
+
 
     colors = not args.no_colors and (args.colors or sys.stdout.isatty())
 

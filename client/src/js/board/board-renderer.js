@@ -3,7 +3,7 @@ import {
   formatBoardHeader,
   formatBoardCellContent,
 } from "../utils/format.js";
-import colorizeText from "../utils/colorize-text.js";
+import { colorizeText } from "../utils/colorize.js";
 
 const generateBoard = (data, sortKey, sortOrder) => {
   if (sortKey && sortOrder) {

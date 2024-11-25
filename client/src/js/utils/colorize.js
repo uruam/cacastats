@@ -1,4 +1,4 @@
-const colorizeText = (text) => {
+export const colorizeText = (text) => {
   const COLOR_MAP = {
     0: "text-black",
     1: "text-red",
@@ -48,4 +48,20 @@ const colorizeText = (text) => {
   return result;
 };
 
-export default colorizeText;
+export const getColorCodedName = (parsedName) => {
+  const COLOR_MAP = {
+    0: "^0",
+    1: "^1",
+    2: "^2",
+    3: "^3",
+    4: "^4",
+    5: "^5",
+    6: "^6",
+    7: "^7",
+    8: "^8",
+  };
+
+  return parsedName
+    .map((part) => COLOR_MAP[part.colortag] + part.text)
+    .join("");
+};

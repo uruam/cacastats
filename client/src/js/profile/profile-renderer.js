@@ -7,8 +7,8 @@ import {
   formatWeaponsStatsHeaderName,
 } from "../utils/format.js";
 import { getMedalImg, getMedalDescription } from "../utils/get-medal-data.js";
+import { colorizeText } from "../utils/colorize.js";
 import getWeaponImg from "../utils/get-weapon-img.js";
-import colorizeText from "../utils/colorize-text.js";
 import calculateAcc from "../utils/calculate-acc.js";
 
 const generateTotalStats = (data) => {

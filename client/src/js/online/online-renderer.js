@@ -1,4 +1,5 @@
 import getMapUrl from "../utils/get-map-url.js";
+import { colorizeText, getColorCodedName } from "../utils/colorize.js";
 
 const renderOnline = (data) => {
   const someText = document.getElementById("someText");
@@ -10,27 +11,29 @@ const renderOnline = (data) => {
   onlineContainer.id = "onlineContainer";
   contentContainer.appendChild(onlineContainer);
 
-  if (!data) {
+  if (!data || !data.servers || data.servers.length === 0) {
     onlineContainer.innerText = "...";
 
     return;
   }
 
+  const server = data.servers[0];
+
   const serverInfoDiv = document.createElement("div");
   serverInfoDiv.id = "onlineServerInfo";
-  serverInfoDiv.style.background = `url(${getMapUrl(data.map)})`;
+  serverInfoDiv.style.background = `url(${getMapUrl(server.map)})`;
 
   const gameTypeDiv = document.createElement("div");
-  gameTypeDiv.textContent = data.gametype.toUpperCase();
+  gameTypeDiv.textContent = server.gametype.str.toUpperCase();
 
   const mapDiv = document.createElement("div");
   mapDiv.id = "onlineMapName";
   // mapDiv.textContent = "am_galmevish-oa3";
-  mapDiv.textContent = data.map;
+  mapDiv.textContent = server.map;
 
   const numberOfPlayersDiv = document.createElement("div");
   numberOfPlayersDiv.id = "onlineNumberOfPlayers";
-  numberOfPlayersDiv.textContent = data.numberOfPlayers;
+  numberOfPlayersDiv.textContent = `${server.players.length}/24`;
 
   const table = document.createElement("table");
   table.id = "onlinePlayers";
@@ -54,11 +57,16 @@ const renderOnline = (data) => {
   serverInfoDiv.appendChild(mapDiv);
   serverInfoDiv.appendChild(numberOfPlayersDiv);
 
-  data.players.forEach((player) => {
+  server.players.forEach((player) => {
     const row = document.createElement("tr");
-    ["name", "ping", "score"].forEach((key) => {
+    ["parsed_name", "ping", "score"].forEach((key) => {
       const cell = document.createElement("td");
-      cell.innerHTML = player[key];
+      if (key === "parsed_name") {
+        cell.innerHTML = colorizeText(getColorCodedName(player[key]));
+        row.appendChild(cell);
+      } else {
+        cell.innerHTML = player[key];
+      }
       row.appendChild(cell);
     });
     tableBody.appendChild(row);

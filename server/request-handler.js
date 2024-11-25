@@ -16,45 +16,6 @@ const getContentType = (parsedUrl) => {
   return null;
 };
 
-const parseOaqueryToJSON = (output) => {
-  const lines = output.trim().split("\n");
-  const serverInfo = {};
-  const players = [];
-
-  // Parse the first line to extract IP and server name
-  const [ipAndServerName] = lines.shift().split(" Players:");
-  const [ip, serverName] = ipAndServerName.split(" ");
-  serverInfo.ip = ip;
-  serverInfo.serverName = serverName.trim();
-
-  // Parse the rest of the lines
-  lines.forEach((line, index) => {
-    if (line.includes(":") && index < 3) {
-      const [key, value] = line.split(":").map((str) => str.trim());
-      if (key === "Players") {
-        serverInfo.numberOfPlayers = value;
-      } else {
-        serverInfo[key.toLowerCase()] = value;
-      }
-    } else if (line.trim() !== "") {
-      // Extract player information
-      const match = line.trim().match(/^(\d+)\s+(\d+ms)\s+(.*)$/);
-      if (match) {
-        const [, score, ping, name] = match;
-        const player = {
-          name,
-          ping,
-          score,
-        };
-        players.push(player);
-      }
-    }
-  });
-  serverInfo.players = players;
-
-  return serverInfo;
-};
-
 const serveStaticFile = (parsedUrl, contentType, res) => {
   const pathName = parsedUrl.pathname;
   let file = `${dirname}/dist${pathName}`;
@@ -135,9 +96,8 @@ const serveOaquery = (res) => {
   const pythonProcess = spawn("python3", [
     "./oaquery.py",
     "96.126.107.177:27200",
-    "--empty",
-    "--bots",
-    "--sort",
+    "--json",
+    // "--json-pretty",
   ]);
 
   let responseData = "";
@@ -152,13 +112,15 @@ const serveOaquery = (res) => {
 
   pythonProcess.on("close", (code) => {
     if (code === 0 && responseData.trim() !== "") {
-      const serverInfo = parseOaqueryToJSON(responseData);
-
       res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(serverInfo));
+      res.end(responseData);
     } else {
-      res.writeHead(500, { "Content-Type": "text/plain" });
-      res.end("Error: Python script execution failed or produced no output");
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify({
+          error: "Oaquery execution failed or produced no output",
+        }),
+      );
     }
   });
 };
