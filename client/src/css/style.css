@@ -5,7 +5,8 @@
 }
 
 * {
-  scrollbar-color: #555 #2e2e2e; /* firefox */
+  /* firefox */
+  scrollbar-color: #555 #2e2e2e;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -408,6 +409,16 @@ footer {
   display: flex;
   justify-content: center;
   padding: 60px 10px 30px 10px;
+}
+
+span#flipEmoji {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+span#footerText {
+  padding: 0px 8px;
+  font-size: 14px;
 }
 
 /* colorized text */
