@@ -228,6 +228,14 @@ div#profilePlayerName {
   font-size: 22px;
 }
 
+div#profilePlayerSkill {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 20px 25px 20px;
+  font-size: 18px;
+}
+
 div#profilePlayerTime {
   display: flex;
   justify-content: center;

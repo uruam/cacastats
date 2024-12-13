@@ -15,7 +15,7 @@ const generateTotalStats = (data) => {
   const table = document.createElement("table");
   table.id = "profileTotal";
 
-  const excludedKeys = ["name", "time", "period", "weapons", "awards"];
+  const excludedKeys = ["name", "skill", "time", "period", "weapons", "awards"];
   const keys = Object.keys(data).filter((key) => !excludedKeys.includes(key));
 
   const header = table.createTHead();
@@ -113,6 +113,9 @@ const renderProfile = (data) => {
   playerNameWrapper.id = "profilePlayerNameWrapper";
   playerName.appendChild(playerNameWrapper);
 
+  const playerSkill = document.createElement("div");
+  playerSkill.id = "profilePlayerSkill";
+
   const playerTime = document.createElement("div");
   playerTime.id = "profilePlayerTime";
 
@@ -143,7 +146,10 @@ const renderProfile = (data) => {
   playerNameWrapper.innerHTML = colorizeText(data.name);
   contentContainer.appendChild(playerName);
 
-  playerTime.innerText = formatTime(data.time);
+  playerSkill.innerHTML = `skill: ${data.skill}`;
+  contentContainer.appendChild(playerSkill);
+
+  playerTime.innerHTML = `time: ${formatTime(data.time)}`;
   contentContainer.appendChild(playerTime);
 
   contentContainer.appendChild(generateTotalStats(data));

@@ -19,26 +19,39 @@ const generateBoard = (data, sortKey, sortOrder) => {
   const header = table.createTHead();
   const headerRow = header.insertRow();
 
-  Object.keys(data[0]).forEach((key) => {
-    if (key && key !== "period" && key !== "weapons" && key !== "awards") {
-      const th = document.createElement("th");
-      const sortButton = document.createElement("button");
-      sortButton.setAttribute("id", "sortButton");
-      sortButton.setAttribute("class", sortOrder);
-      sortButton.setAttribute("data-sort-key", key.toLowerCase());
-      sortButton.textContent = "⬍";
-      th.textContent = formatBoardHeader(key);
+  // Create a new array of keys with "skill" as the second element
+  const keys = Object.keys(data[0]).filter(
+    (key) => key && key !== "period" && key !== "weapons" && key !== "awards",
+  );
 
-      if (key === "hdg") {
-        th.innerHTML = `<a href="/info">HDG*</a>`;
-      }
+  const reorderedKeys = [
+    "name",
+    "skill",
+    ...keys.filter((key) => key !== "name" && key !== "skill"),
+  ];
 
-      if (key !== "name") {
-        th.appendChild(sortButton);
-      }
+  reorderedKeys.forEach((key) => {
+    const th = document.createElement("th");
+    const sortButton = document.createElement("button");
+    sortButton.setAttribute("id", "sortButton");
+    sortButton.setAttribute("class", sortOrder);
+    sortButton.setAttribute("data-sort-key", key.toLowerCase());
+    sortButton.textContent = "⬍";
+    th.textContent = formatBoardHeader(key);
 
-      headerRow.appendChild(th);
+    if (key === "skill") {
+      th.innerHTML = `<a href="/info">SKILL*</a>`;
     }
+
+    if (key === "hdg") {
+      th.innerHTML = `<a href="/info">HDG*</a>`;
+    }
+
+    if (key !== "name") {
+      th.appendChild(sortButton);
+    }
+
+    headerRow.appendChild(th);
   });
 
   const body = table.createTBody();
@@ -46,18 +59,16 @@ const generateBoard = (data, sortKey, sortOrder) => {
   data.forEach((obj) => {
     const row = body.insertRow();
     let isFirstCell = true;
-    Object.keys(obj).forEach((key) => {
-      if (key && key !== "period" && key !== "weapons" && key !== "awards") {
-        const cell = row.insertCell();
-        if (isFirstCell) {
-          const link = document.createElement("a");
-          link.href = `/profile?${encodeURIComponent(obj[key])}`;
-          link.innerHTML = colorizeText(obj[key]);
-          cell.appendChild(link);
-          isFirstCell = false;
-        } else {
-          cell.textContent = formatBoardCellContent(key, obj[key]);
-        }
+    reorderedKeys.forEach((key) => {
+      const cell = row.insertCell();
+      if (isFirstCell) {
+        const link = document.createElement("a");
+        link.href = `/profile?${encodeURIComponent(obj[key])}`;
+        link.innerHTML = colorizeText(obj[key]);
+        cell.appendChild(link);
+        isFirstCell = false;
+      } else {
+        cell.textContent = formatBoardCellContent(key, obj[key]);
       }
     });
   });
