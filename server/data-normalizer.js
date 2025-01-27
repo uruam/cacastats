@@ -38,7 +38,7 @@ const calculateSkill = ({ score, time, wlr, kdr, dgdtr, hdg, acc }) => {
   const SCORE_WEIGHT = 1;
   const TIME_WEIGHT = 1;
   const HDG_WEIGHT = 1;
-  const WLR_WEIGHT = 1.4;
+  const WLR_WEIGHT = 1.3;
   const KDR_WEIGHT = 1.7;
   const DGDTR_WEIGHT = 1.7;
   const ACC_WEIGHT = 1.5;
