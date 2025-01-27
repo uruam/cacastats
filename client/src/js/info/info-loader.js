@@ -12,7 +12,7 @@ const infoLoader = () => {
       <li>SCORE (SCORE_WEIGHT = 1): The total points accumulated by the player. Scaled down using the logarithm function to handle high values effectively.</li>
       <li>TIME (TIME_WEIGHT = 1): The total time the player has spent playing. Scaled down using the logarithm function to handle high values effectively.</li>
       <li>HDG (HDG_WEIGHT = 1): The highest damage given by the player in a single game, indicating peak performance. Scaled down using the logarithm function to handle high values effectively.</li>
-      <li>W/L (WLR_WEIGHT = 1.4): The ratio of wins to losses, indicating the player's team's success rate.</li>
+      <li>W/L (WLR_WEIGHT = 1.3): The ratio of wins to losses, indicating the player's team's success rate.</li>
       <li>K/D (KDR_WEIGHT = 1.7): The ratio of kills to deaths, reflecting the player's combat effectiveness.</li>
       <li>DG/DT (DGDTR_WEIGHT = 1.7): The ratio of damage given to damage taken, showing the player's efficiency in dealing damage while minimizing damage taken.</li>
       <li>ACC (ACC_WEIGHT = 1.5): The percentage of shots that hit the target, representing the player's overall shooting accuracy.</li>
