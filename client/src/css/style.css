@@ -6,15 +6,15 @@
 
 * {
   /* firefox */
-  scrollbar-color: #555 #2e2e2e;
+  scrollbar-color: rgb(85, 85, 85) rgb(46, 46, 46);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #555;
+  background: rgb(85, 85, 85);
 }
 
 ::-webkit-scrollbar-track {
-  background: #2e2e2e;
+  background: rgb(46, 46, 46);
 }
 
 body {
