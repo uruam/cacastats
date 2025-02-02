@@ -49,20 +49,24 @@ const calculateSkill = ({ score, time, wlr, kdr, dgdtr, hdg, acc }) => {
   // Apply a power to the timeFactor to decrease its effect (using square root)
   const timeFactor = Math.min(1, time / MIN_TIME) ** 0.5;
 
+  // safeLog function to prevent NaN and -Infinity
+  // Adding 1 ensures that the logarithm function does not receive a zero value
+  const safeLog = (x) => Math.log10(Math.max(0, x) + 1);
+
   const skill =
-    // Log10 to scale down high scores, playtimes and HDG
-    // Adding 1 to the value ensures that the logarithm function does not
-    // receive a zero value, the logarithm of zero is undefined
-    SCORE_WEIGHT * Math.log10(score + 1) +
-    TIME_WEIGHT * Math.log10(time + 1) +
-    HDG_WEIGHT * Math.log10(hdg + 1) +
+    // safeLog to scale down high scores, playtimes and HDG
+    SCORE_WEIGHT * safeLog(score) +
+    TIME_WEIGHT * safeLog(time) +
+    HDG_WEIGHT * safeLog(hdg) +
     WLR_WEIGHT * wlr +
     KDR_WEIGHT * kdr +
     DGDTR_WEIGHT * dgdtr +
     (ACC_WEIGHT * acc) / 100;
 
   const adjustedSkill = skill * timeFactor * 100;
-  const calculatedSkill = adjustedSkill.toFixed(0);
+  const calculatedSkill = Number.isNaN(adjustedSkill)
+    ? 0
+    : adjustedSkill.toFixed(0);
 
   return calculatedSkill;
 };
