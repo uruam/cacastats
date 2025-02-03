@@ -46,8 +46,8 @@ const fetchGamesData = async () => {
         const maybeCacaGame = allGames[key];
 
         return (
-          maybeCacaGame.servername === "^2/^3N^2/^3ALLMODES^7|^5CA" &&
-          maybeCacaGame.gametype === 8
+          maybeCacaGame.servername === process.env.SERVERNAME &&
+          maybeCacaGame.gametype === Number(process.env.GAMETYPE)
         );
       })
       .map((key) => ({ [key]: allGames[key] }));
