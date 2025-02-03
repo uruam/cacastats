@@ -30,12 +30,20 @@ Install server dependencies
 npm install
 ```
 
-Create a .env file in the server directory and add your `PORT` environment variable, which specifies the port on which the app will run, and the `API_URL` environment variable, which specifies the location of the matches.json file. For example:
+Create a `.env` file in the server directory and add the following environment variables:
+
+- `PORT`: Specifies the port on which the app will run.
+- `API_URL`: Specifies the location of the `matches.json` file.
+- `SERVERNAME`: Specifies the name of your server in the `matches.json` file.
+- `GAMETYPE`: Specifies the game type in the `matches.json` file.
+
+For example:
 
 ```
 PORT=3000
 API_URL=https://my-rat-server.com/
-
+SERVERNAME=MY_RAT_SERVER_CA
+GAMETYPE=8
 ```
 
 Start the server
