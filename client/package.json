@@ -1,5 +1,5 @@
 {
-  "name": "caca.gg",
+  "name": "cacastats",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode=development --watch",
