@@ -1,6 +1,9 @@
-# [caca.gg](https://caca.gg)
+# cacastats
 
-Web-based application designed to provide a comprehensive scoreboard and player profiles with detailed statistics for a RatMod Clan Arena game server. It allows users to effortlessly access both the overall game statistics and individual player metrics from the last 30 days, enhancing their gaming experience.
+Web-based application designed to provide a comprehensive scoreboard and
+player profiles with detailed statistics for a RatMod Clan Arena game server.
+It allows users to effortlessly access both the overall game statistics and
+individual player metrics from the last 25 days, enhancing their gaming experience.
 
 ## Requirement
 
@@ -15,13 +18,13 @@ To run the project locally:
 Clone the repository
 
 ```
-git clone https://github.com/uruam/caca.gg.git
+git clone https://github.com/uruam/cacastats.git
 ```
 
 Navigate to the `server` directory
 
 ```
-cd caca.gg/server
+cd cacastats/server
 ```
 
 Install server dependencies
@@ -42,7 +45,7 @@ For example:
 ```
 PORT=3000
 API_URL=https://my-rat-server.com/
-SERVERNAME=MY_RAT_SERVER_CA
+SERVERNAME=MY-RAT-SERVER-CA
 GAMETYPE=8
 ```
 
@@ -64,7 +67,8 @@ Install dependencies
 npm install
 ```
 
-Automatically transcompile and bundle the client code during development whenever source files change
+Automatically transcompile and bundle the client code during development
+whenever source files change
 
 ```
 npm run dev
@@ -78,11 +82,14 @@ npm run build
 
 ## Usage
 
-The server will be running locally on port 3000. Access the application by opening a web browser and going to [http://localhost:3000](http://localhost:3000).
+The server will be running locally on port 3000. Access the application by
+opening a web browser and going to [http://localhost:3000](http://localhost:3000).
 
 ## Code Style
 
-The project utilizes ESLint and Prettier for code linting and formatting. While these tools are integrated into the build process for the client using webpack, the server code needs to be linted separately.
+The project utilizes ESLint and Prettier for code linting and formatting. While
+these tools are integrated into the build process for the client using webpack,
+the server code needs to be linted separately.
 
 Steps:
 
